@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf build && pkg . --public",
-    "postbuild": "cd ./build && mkdir config && cd config && touch cookies.json",
+    "build": "rm -rf glyph-redeemer && pkg . --public",
+    "postbuild": "cd ./glyph-redeemer && mkdir config && cd config && touch cookies.json",
     "start": "node src/index.js"
   },
   "dependencies": {
