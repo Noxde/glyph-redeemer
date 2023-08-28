@@ -1,0 +1,22 @@
+{
+  "name": "glyph-redeemer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build && pkg . --public",
+    "postbuild": "cd ./build && mkdir config && cd config && touch cookies.json",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "nanospinner": "^1.1.0",
+    "puppeteer": "^20.8.3"
+  },
+  "license": "MIT",
+  "bin": "src/index.js",
+  "pkg": {
+    "scripts": [
+      "src/*.js"
+    ],
+    "outputPath": "glyph-redeemer"
+  }
+}
