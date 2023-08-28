@@ -63,7 +63,7 @@ You can download the pre-built executable for your operating system from the [Re
 
 Choose the version that matches your operating system and download it.
 
-**Note:** Ensure that you have the necessary browser extension for cookie management, as mentioned in the [Prerequisites](#3-prerequisites) section, to use the application effectively.
+**Note:** Ensure that you have the necessary browser extension for cookie management, as mentioned in the [Prerequisites](#2-prerequisites) section, to use the application effectively.
 
 ## 5. Usage
 
