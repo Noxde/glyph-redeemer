@@ -32,5 +32,3 @@ const cookiesPath = process.pkg
     text: "Chromium removed",
   });
 })();
-
-console.log("test");
