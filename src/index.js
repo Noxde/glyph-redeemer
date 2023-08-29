@@ -2,6 +2,7 @@ const redeemer = require("./redeemer.js");
 const { installChromium, removeChromium } = require("./installer.js");
 const path = require("path");
 const { createSpinner } = require("nanospinner");
+const readline = require("readline");
 
 const cookiesPath = process.pkg
   ? path.join(path.dirname(process.execPath), "config", "cookies.json")
@@ -31,4 +32,15 @@ const cookiesPath = process.pkg
   chromiumSpinner.success({
     text: "Chromium removed",
   });
+
+  if (process.platform === "win32") {
+    readline
+      .createInterface({
+        input: process.stdin,
+        output: process.stdout,
+      })
+      .question("Press enter to close the program...", (ans) =>
+        process.exit(0)
+      );
+  }
 })();
