@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf glyph-redeemer && pkg . --public",
-    "postbuild": "cd ./glyph-redeemer && mkdir config && cd config && touch cookies.json",
+    "postbuild": "cd ./glyph-redeemer && mkdir config && cd config && touch cookies.json && cp ../../config/codes.txt ./codes.txt",
     "start": "node src/index.js"
   },
   "dependencies": {
