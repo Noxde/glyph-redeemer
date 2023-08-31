@@ -1,4 +1,8 @@
-# Warframe Glyph Redeemer
+<div align=center> 
+  <img alt="creator-program-logo" src="./Images/creator-program-logo.png" width="220px">
+</div>
+
+<h1 align="center">Warframe Glyph Redeemer</h1>
 
 ## Table of Contents
 
@@ -71,8 +75,6 @@ Using the Warframe Glyph Redeemer is straightforward:
 
 **Notes:**
 
-- If you don't run the program from the terminal it will automatically close on error or when it finished redeeming the codes (it will still remove the chromium that installed)
-
 - On windows after executing the .exe file you have to click on <ins>moreinfo</ins> and then "Run anyway"
 
 ### **Steps**:
@@ -89,15 +91,23 @@ Using the Warframe Glyph Redeemer is straightforward:
    glyph-redeemer/config/cookies.json
    ```
 
-4. You are now prepared to start the Warframe Glyph Redeemer.
+4. You can customize what codes it will redeem modifying
 
-5. The application will download Chromium to your temporary files folder for use with Puppeteer and attempt to log in to your Warframe account.
+   ```
+   glyph-redeemer/config/codes.txt
+   ```
 
-6. It will then start redeeming the codes, displaying success or failure for each code.
+   Each code should be in a new line. By default it will come with all the codes available.
+
+5. You are now prepared to start the Warframe Glyph Redeemer.
+
+6. The application will download Chromium to your temporary files folder for use with Puppeteer and attempt to log in to your Warframe account.
+
+7. It will then start redeeming the codes, displaying success or failure for each code.
 
    ![Glyph Redeemer in Action](Images/glyph-redeemer_demo.gif)
 
-7. After completing the code redemption, the application will remove the downloaded Chromium.
+After completing the code redemption, the application will remove the downloaded Chromium.
 
 ## 6. Roadmap
 
