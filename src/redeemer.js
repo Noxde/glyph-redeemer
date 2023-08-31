@@ -1,8 +1,25 @@
 const puppeteer = require("puppeteer");
 const { createSpinner } = require("nanospinner");
-let codes = require("../wfCodes.json");
+const { readFileSync } = require("fs");
+const path = require("path");
+
+const codesPath = process.pkg
+  ? path.join(path.dirname(process.execPath), "config", "codes.txt")
+  : path.join(__dirname, "..", "config/codes.txt");
+
+let codes = readFileSync(codesPath, {
+  encoding: "utf-8",
+})
+  .split("\n")
+  .filter((x) => x !== "");
 
 module.exports = async function redeemer(path, cookies) {
+  if (!codes[0]) {
+    throw new Error(
+      "There are no codes to redeem, make sure that codes.txt is not empty"
+    );
+  }
+
   cookies = cookies.map((x) => {
     if (x.partitionKey === null) {
       x.partitionKey = ""; // Fix partition key for puppeteer
@@ -63,6 +80,7 @@ module.exports = async function redeemer(path, cookies) {
     await Promise.all([
       page.waitForNavigation({
         waitUntil: "domcontentloaded",
+        timeout: 60_000,
       }),
       page.click("#btnSubmit"),
     ]);
