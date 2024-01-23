@@ -6,14 +6,16 @@
 
 ## Table of Contents
 
-1. [Introduction](#1-introduction)
-2. [Download](#2-download)
-3. [Prerequisites](#3-prerequisites)
-4. [Installation](#4-installation)
-5. [Usage](#5-usage)
-6. [Roadmap](#6-roadmap)
-7. [Contributing](#7-contributing)
-8. [License](#8-license)
+- [1. Introduction](#1-introduction)
+- [2. Prerequisites](#2-prerequisites)
+- [3. Installation](#3-installation)
+- [4. Download](#4-download)
+- [5. Usage](#5-usage)
+- [6. Roadmap](#6-roadmap)
+- [7. Contributing](#7-contributing)
+- [8. License](#8-license)
+
+**WARNING: If you are thinking about using this software keep in mind you might get "banned" from Warframe's website, you will still be able to play the game but you might not be able to access the website on the wifi network that you used this software for an undefined amount of time. This just happened to me while testing this making some changes to it ![Access denied to warframe website](https://i.imgur.com/xZfzujN.png)**
 
 ## 1. Introduction
 
@@ -29,9 +31,6 @@ Before using the Warframe Glyph Redeemer, ensure you have the following prerequi
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) (including npm)
-
-Additionally, you will need a browser extension for cookie management based on your preferred web browser like
-[Cookie Editor](https://cookie-editor.cgagnier.ca/). It's available for Chrome, FireFox, Safari, Edge and Opera
 
 ## 3. Installation
 
@@ -67,7 +66,8 @@ You can download the pre-built executable for your operating system from the [Re
 
 Choose the version that matches your operating system and download it.
 
-**Note:** Ensure that you have the necessary browser extension for cookie management, as mentioned in the [Prerequisites](#2-prerequisites) section, to use the application effectively.
+Additionally, you will need a browser extension for cookie management based on your preferred web browser like
+[Cookie Editor](https://cookie-editor.cgagnier.ca/). It's available for Chrome, FireFox, Safari, Edge and Opera
 
 ## 5. Usage
 
