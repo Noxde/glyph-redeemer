@@ -4,6 +4,8 @@
 
 <h1 align="center">Warframe Glyph Redeemer</h1>
 
+**WARNING: If you are thinking about using this software keep in mind you might get "banned" from Warframe's website, you will still be able to play the game but you might not be able to access the website on the wifi network that you used this software for an undefined amount of time. This just happened to me while testing this making some changes to it ![Access denied to warframe website](https://i.imgur.com/xZfzujN.png)**
+
 ## Table of Contents
 
 - [1. Introduction](#1-introduction)
@@ -14,8 +16,6 @@
 - [6. Roadmap](#6-roadmap)
 - [7. Contributing](#7-contributing)
 - [8. License](#8-license)
-
-**WARNING: If you are thinking about using this software keep in mind you might get "banned" from Warframe's website, you will still be able to play the game but you might not be able to access the website on the wifi network that you used this software for an undefined amount of time. This just happened to me while testing this making some changes to it ![Access denied to warframe website](https://i.imgur.com/xZfzujN.png)**
 
 ## 1. Introduction
 
