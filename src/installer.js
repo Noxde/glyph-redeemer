@@ -1,36 +1,74 @@
-const puppeteer = require("@puppeteer/browsers");
+const { install } = require("@puppeteer/browsers");
 const { rm, readdirSync, statSync } = require("fs");
+const readline = require("readline/promises");
 const path = require("path");
-const os = require("os");
-const temp = os.tmpdir();
+const cacheDir =
+  process.env.APPDATA ||
+  (process.platform == "darwin"
+    ? process.env.HOME + "/Library/Preferences"
+    : process.env.HOME + "/.local/share");
 
 module.exports.installChromium = async function () {
-  const buildId = "114.0.5735.133"; //which version you want to download
+  let startTime = Date.now();
+  let acc = 0;
+  let lastProgress = 0;
 
-  await puppeteer.install({
-    cacheDir: temp,
+  const { path: chromiumPath } = await install({
     browser: "chrome",
-    platform:
-      process.platform === "linux"
-        ? "linux"
-        : process.platform === "darwin"
-        ? "mac"
-        : "win64",
-    buildId,
+    buildId: "112.0.5615.121",
+    cacheDir: path.join(cacheDir, "glyphRedeemer"),
+    downloadProgressCallback: (progress, total) => {
+      // Console log each time a second passes
+      if (Date.now() - startTime >= 1000) {
+        console.clear();
+        // prettier-ignore
+        console.log(
+          `Downloaded: ${(progress / 1024 / 1024).toFixed(2)}Mb\nTotal: ${(total / 1024 / 1024).toFixed(2)}Mb\nSpeed: ${(acc / 1024 / 1024).toFixed(2)}Mb/s`
+          );
+        startTime = Date.now();
+        acc = 0;
+      } else {
+        acc += progress - lastProgress;
+        lastProgress = progress;
+      }
+    },
   });
+  const dir = getFiles(chromiumPath);
 
-  const dir = getFiles(path.join(temp, "chrome"));
   return dir.find((x) => x.match(/(chrome|chrome.exe)$/gm));
 };
 
 module.exports.removeChromium = async function () {
-  rm(
-    path.join(temp, "chrome"),
-    {
-      recursive: true,
-    },
-    (err) => err
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  const answer = await rl.question(
+    "Do you want to remove the installed chromium? if you remove it will be installed the next time you execute this script (Y/n):\n"
   );
+
+  if (
+    !answer ||
+    answer.toLowerCase() === "y" ||
+    answer.toLowerCase() === "yes"
+  ) {
+    rm(
+      path.join(cacheDir, "glyphRedeemer"),
+      {
+        recursive: true,
+      },
+      (err) => {
+        if (!err) {
+          console.log("Chromium removed.");
+        }
+      }
+    );
+  } else if (answer.toLowerCase() === "n" || answer.toLowerCase() === "no") {
+    rl.close();
+  } else {
+    console.log("Invalid answer, chromium will not be removed.");
+  }
+  rl.close();
 };
 
 // Source: https://learnwithparam.com/blog/get-all-files-in-a-folder-using-nodejs/
