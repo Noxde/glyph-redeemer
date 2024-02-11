@@ -3,20 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf glyph-redeemer && pkg . --public",
+    "uglify": "uglifyjs-folder src -eo out -x .js ",
+    "build": "rm -rf glyph-redeemer && npm run uglify && pkg . -t node18-linux,node18-win32,node18-macos --compress GZip",
     "postbuild": "cd ./glyph-redeemer && mkdir config && cd config && touch cookies.json && cp ../../config/codes.txt ./codes.txt",
     "start": "node src/index.js"
   },
   "dependencies": {
     "nanospinner": "^1.1.0",
-    "puppeteer": "^20.8.3"
+    "open-term": "^2.0.4",
+    "puppeteer": "^20.8.3",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.12"
   },
   "license": "MIT",
-  "bin": "src/index.js",
+  "bin": "out/index.js",
   "pkg": {
-    "scripts": [
-      "src/*.js"
-    ],
     "outputPath": "glyph-redeemer"
   }
 }
