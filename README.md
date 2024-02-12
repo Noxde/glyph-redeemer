@@ -4,7 +4,9 @@
 
 <h1 align="center">Warframe Glyph Redeemer</h1>
 
-**WARNING: If you are thinking about using this software keep in mind you might get "banned" from Warframe's website, you will still be able to play the game but you might not be able to access the website on the wifi network that you used this software for an undefined amount of time (for it resolved itself after 2 days) . This just happened to me while testing this making some changes to it ![Access denied to warframe website](https://i.imgur.com/xZfzujN.png)**
+**WARNING: If you are thinking about using this software keep in mind you might get "banned" from Warframe's website though it's highly unlikely it happened to me because while testing I used too many codes too fast, I didn't have any issues using it normally. You will still be able to play the game but you might not be able to access the website on the wifi network that you used this software on for an undefined amount of time (for me it resolved itself after 2 days). This just happened to me while testing this making some changes to it so you should not have any problems ![Access denied to warframe website](https://i.imgur.com/xZfzujN.png)**
+
+Thanks [Voltage](https://forums.warframe.com/profile/1419671-voltage/) for updating the [list of codes](https://forums.warframe.com/topic/992008-free-promocodes-and-glyphs-all-platforms/) on the warframe forums, if it weren't for this this would not have all the updated codes
 
 ## Table of Contents
 
@@ -75,7 +77,7 @@ Using the Warframe Glyph Redeemer is straightforward:
 
 **Notes:**
 
-- On windows after executing the .exe file you have to click on <ins>moreinfo</ins> and then "Run anyway"
+- On windows after executing the .exe file you might have to click on <ins>moreinfo</ins> and then "Run anyway"
 
 ### **Steps**:
 
@@ -97,11 +99,12 @@ Using the Warframe Glyph Redeemer is straightforward:
    glyph-redeemer/config/codes.txt
    ```
 
-   Each code should be in a new line. By default it will come with all the codes available.
+   Each code should be in a new line. By default it will come with all the codes available or you can download/copy the codes from the updated file from this repo.
 
 5. You are now prepared to start the Warframe Glyph Redeemer.
 
-6. The application will download Chromium to your temporary files folder for use with Puppeteer and attempt to log in to your Warframe account.
+6. The application will download Chromium to your AppData folder if you are on windows to use with Puppeteer and attempt to log in to your Warframe account.
+   If you are on linux chromium will be installed on `~/.local/share/glyphRedeemer` or mac `~/Library/Preferences/glyphRedeemer`
 
 7. It will then start redeeming the codes, displaying success or failure for each code.
 
@@ -114,11 +117,10 @@ After completing the code redemption, the application will remove the downloaded
 This application is designed for single-use code redeeming. However, I plan to add the following features in the future to enhance usability:
 
 - **Redeem Multiple Codes:** Allow users to redeem multiple codes at once for faster redeeming.
-- **Code List Updates:** I will regularly update the codes list to keep it current.
-- **Remove the need to install chromium:** The program should first try to find your already installed browser, for now this is easier as it.
+- **Code List Updates:** Remove the need to use the codes from the repo and get the codes from the forums.
+- **Remove the need to install chromium:** The program should first try to find your already installed browser, for now this is easier as it is.
 - **Simpler logging in:** Removing the need of a cookie editor, just simply login through the program.
-- **Sign executable:** The idea is to avoid the Windows protected your PC warning, not sure if its by singing the executable.
-
+- 
 ## 7. Contributing
 
 Contributions are welcome. Feel free to improve on the project.
@@ -126,3 +128,5 @@ Contributions are welcome. Feel free to improve on the project.
 ## 8. License
 
 This project is licensed under the [MIT License](LICENSE).
+
+This README was made with the help of chatgpt
