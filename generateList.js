@@ -8,6 +8,11 @@ const getCodes = require("./codeUpdater");
 
   let list = "";
   codes.sort((a, b) => (a.code.toLowerCase() < b.code.toLowerCase() ? -1 : 1));
+  writeFileSync(
+    "./config/codes.txt",
+    codes.map((x) => x.code).join("\n"),
+    "utf-8"
+  );
 
   let html = ``;
   for (let i = 0; i < codes.length; i += 5) {
