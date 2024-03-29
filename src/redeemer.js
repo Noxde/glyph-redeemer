@@ -123,6 +123,8 @@ module.exports = async function redeemer(cookies, path) {
 
     codes = codes.filter((x) => x !== code);
     await page.reload();
+    console.log("Trying next code in 1 second.");
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
   await browser.close();
 };
