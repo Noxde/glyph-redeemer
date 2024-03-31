@@ -142,8 +142,8 @@ module.exports = async function redeemer(cookies, path) {
     console.log(`${codes.length - 1} Codes remaining\n`);
 
     codes = codes.filter((x) => x !== code);
-    console.log("Trying next code in 1 second.");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("Trying next code in 3 seconds.");
+    await new Promise((resolve) => setTimeout(resolve, 3000));
   }
   await browser.close();
 };
