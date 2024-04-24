@@ -11,7 +11,7 @@
   "dependencies": {
     "nanospinner": "^1.1.0",
     "open-term": "^2.0.4",
-    "puppeteer": "^22.6.1",
+    "puppeteer": "^22.7.0",
     "winston": "^3.11.0"
   },
   "devDependencies": {
