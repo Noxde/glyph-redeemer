@@ -71,6 +71,10 @@ Choose the version that matches your operating system and download it.
 Additionally, you will need a browser extension for cookie management based on your preferred web browser like
 [Cookie Editor](https://cookie-editor.cgagnier.ca/). It's available for Chrome, FireFox, Safari, Edge and Opera
 
+After installing cookie editor make sure to click on All sites when the extensions requests permission
+![image](https://github.com/Noxde/glyph-redeemer/assets/70549780/bcd246a0-74ad-4c2f-8f2b-faac48d23533)
+
+
 ## 5. Usage
 
 Using the Warframe Glyph Redeemer is straightforward:
