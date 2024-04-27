@@ -1,5 +1,9 @@
 <div align=center> 
   <img alt="creator-program-logo" src="./Images/creator-program-logo.png" width="220px">
+
+  ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Noxde/glyph-redeemer/total?label=Total%20Downloads)
+  ![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/Noxde/glyph-redeemer/latest/total?label=Downloads%40latest)
+
 </div>
 
 <h1 align="center">Warframe Glyph Redeemer</h1>
