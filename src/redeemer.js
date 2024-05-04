@@ -1,26 +1,12 @@
 const puppeteer = require("puppeteer");
 const { createSpinner } = require("nanospinner");
-const { readFileSync } = require("fs");
-const path = require("path");
 const { addLog, readLog } = require("./logger");
-const readline = require("readline/promises");
-
-const codesPath = process.pkg
-  ? path.join(path.dirname(process.execPath), "config", "codes.txt")
-  : path.join(__dirname, "..", "config/codes.txt");
-
-let codes = readFileSync(codesPath, {
-  encoding: "utf-8",
-})
-  .split("\n")
-  .filter((x) => x !== "");
+const getCodes = require("../codeUpdater");
 
 module.exports = async function redeemer(cookies, path) {
-  if (!codes[0]) {
-    throw new Error(
-      "There are no codes to redeem, make sure that codes.txt is not empty"
-    );
-  }
+  const codesSpinner = createSpinner("Fetching codes").start();
+  let codes = await getCodes();
+  codesSpinner.success();
 
   const loginSpinner = createSpinner("Trying to login").start();
   const browser = await puppeteer.launch({
@@ -96,8 +82,10 @@ module.exports = async function redeemer(cookies, path) {
   });
 
   const log = readLog();
-  codes = codes.filter((x) => !log.find((y) => y?.code === x));
-  console.log(`Found ${codes.length} codes to redeem\n`);
+  codes = codes
+    .map((x) => x.code)
+    .filter((x) => !log.find((y) => y?.code === x));
+  console.log(`Found ${codes.length} new codes to redeem\n`);
 
   for (let code of codes) {
     console.time("It took");
