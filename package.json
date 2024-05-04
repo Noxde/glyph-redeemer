@@ -9,9 +9,12 @@
     "start": "node src/index.js"
   },
   "dependencies": {
+    "axios": "^0.28.0",
+    "extract-zip": "^2.0.1",
     "nanospinner": "^1.1.0",
     "open-term": "^2.0.4",
     "puppeteer": "^20.8.3",
+    "tar": "^6.2.0",
     "winston": "^3.11.0"
   },
   "devDependencies": {
