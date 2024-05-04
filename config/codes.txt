@@ -2,6 +2,7 @@
 AdmiralBahroo
 AeonKnight86
 AGayGuyPlays
+Akari
 AlainLove
 AlexanderDario
 Amprov
@@ -27,6 +28,7 @@ Bwana
 CalamityDeath
 CaleyEmerald
 CanOfCraig
+Carchara
 Casardis
 CephalonSquared
 CGsKnackie
@@ -34,6 +36,7 @@ ChacyTay
 Char
 Chelestra
 Cleonaturin
+Codoma
 CohhCarnage
 ColdScar
 ColdTiger
@@ -117,6 +120,7 @@ LadyNovita
 LadyTheLaddy
 LeoDoodling
 LeyzarGamingViews
+Light_Micke
 LilLexi
 LucianPlaysAllDay
 LynxAria
@@ -138,6 +142,7 @@ Mogamu
 MrRoadBlock
 MrSteelWar
 MrWarframeGuy
+Nononom12
 NoSympathyy
 Np161
 OddieOwl
@@ -157,6 +162,7 @@ ProfessorBroman
 Purkinje
 PurpleFlurp
 Pyrah
+PyrrhicSerenity
 r/Warframe
 RagingTerror
 Rahetalius
@@ -196,9 +202,11 @@ TBGKaru
 TeaWrex
 TheGamio
 TheKengineer
+ThePanda
 TinBears
 TioMario
 TioRamon
+Tortoise
 TotalN3wb
 TrashFrame
 Triburos
@@ -217,8 +225,10 @@ Wanderbots
 WarframeCommunityDiscord
 WarframeRunway
 WarframeWiki
+WealWest
 WideScreenJohn
 Woxli
+xBocchanVTx
 Xenogelion
 xxVampixx
 YourLuckyClover

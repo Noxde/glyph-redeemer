@@ -13,7 +13,7 @@
     "extract-zip": "^2.0.1",
     "nanospinner": "^1.1.0",
     "open-term": "^2.0.4",
-    "puppeteer": "^20.8.3",
+    "puppeteer": "^22.7.0",
     "tar": "^6.2.0",
     "winston": "^3.11.0"
   },

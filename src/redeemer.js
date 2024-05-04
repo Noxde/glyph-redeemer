@@ -3,6 +3,7 @@ const { createSpinner } = require("nanospinner");
 const { readFileSync } = require("fs");
 const path = require("path");
 const { addLog, readLog } = require("./logger");
+const readline = require("readline/promises");
 
 const codesPath = process.pkg
   ? path.join(path.dirname(process.execPath), "config", "codes.txt")
@@ -55,22 +56,41 @@ module.exports = async function redeemer(cookies, path) {
       req.continue();
     }
   });
-  await page.goto("https://www.warframe.com/promocode", {
+  await page.goto("https://www.warframe.com/", {
     waitUntil: "domcontentloaded",
   });
-  let username = await page
-    .waitForSelector(".HeaderUserProfile-nameText")
-    .then((el) => el.evaluate((x) => x.textContent));
 
-  await new Promise((resolve) => setTimeout(resolve, 250));
+  // Wait for the username to show up, if it doesnt in 15 seconds it failed to login
+  await page
+    .waitForFunction(
+      () =>
+        document.querySelector(".HeaderUserProfile-nameText").innerText !==
+        "--",
+      {
+        timeout: 15_000,
+      }
+    )
+    .catch(async () => {
+      loginSpinner.error({
+        text: "Failed to login into account, update your cookies and try again",
+      });
+      if (process.platform === "win32") {
+        await readline
+          .createInterface({
+            input: process.stdin,
+            output: process.stdout,
+          })
+          .question("Press enter to close the program...");
 
-  if (username === "--") {
-    browser.close();
-    loginSpinner.error({
-      text: "Failed to login into account, update your cookies and try again",
+        process.exit(1);
+      }
     });
-    return;
-  }
+
+  let username = await page.$eval(
+    ".HeaderUserProfile-nameText",
+    (el) => el.textContent
+  );
+
   loginSpinner.success({
     text: `Successfully logged in as ${username}`,
   });
@@ -81,7 +101,7 @@ module.exports = async function redeemer(cookies, path) {
 
   for (let code of codes) {
     console.time("It took");
-    await page.waitForSelector("#promocode_input").then((e) => e.type(code));
+    await page.goto(`https://www.warframe.com/promocode?code=${code}`);
     let codeSpinner = createSpinner(`Trying to redeem ${code}`).start();
 
     await Promise.all([
@@ -122,7 +142,8 @@ module.exports = async function redeemer(cookies, path) {
     console.log(`${codes.length - 1} Codes remaining\n`);
 
     codes = codes.filter((x) => x !== code);
-    await page.reload();
+    console.log("Trying next code in 3 seconds.");
+    await new Promise((resolve) => setTimeout(resolve, 3000));
   }
   await browser.close();
 };

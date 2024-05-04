@@ -15,7 +15,7 @@ module.exports.installChromium = async function () {
 
   const { path: chromiumPath } = await install({
     browser: "chrome",
-    buildId: "112.0.5615.121",
+    buildId: "124.0.6367.60",
     cacheDir: path.join(cacheDir, "glyphRedeemer"),
     downloadProgressCallback: (progress, total) => {
       // Console log each time a second passes
