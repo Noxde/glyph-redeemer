@@ -24,6 +24,8 @@ const cookiesPath = process.pkg
     await update(isUpdated.assets);
   }
 
+  let cookies = checkCookies();
+
   const chromiumSpinner = createSpinner("Installing chromium").start();
   const chromiumPath = await installChromium();
   chromiumSpinner.success({
@@ -43,7 +45,30 @@ const cookiesPath = process.pkg
         output: process.stdout,
       })
       .question("Press enter to close the program...", (ans) =>
-        process.exit(1)
+        process.exit(0)
       );
   }
 })();
+
+function checkCookies() {
+  let cookies;
+  try {
+    cookies = require(cookiesPath);
+    return cookies;
+  } catch (err) {
+    console.error(
+      "Could not find the cookies file make sure its in the config folder and the file is not empty."
+    );
+    if (process.env.APPDATA) {
+      return readline
+        .createInterface({
+          input: process.stdin,
+          output: process.stdout,
+        })
+        .question("Press enter to close the program...", (ans) =>
+          process.exit(0)
+        );
+    }
+    process.exit(0);
+  }
+}
