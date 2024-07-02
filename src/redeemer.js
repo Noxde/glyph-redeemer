@@ -22,11 +22,11 @@ module.exports = async function redeemer(codes, cookies, path) {
   });
 
   const [page] = await browser.pages();
-  await page.setExtraHTTPHeaders({ DNT: "1" });
 
   await page.setCookie(...cookies);
-  await page.setRequestInterception(true);
 
+  await page.setExtraHTTPHeaders({ DNT: "1" });
+  await page.setRequestInterception(true);
   page.on("request", (req) => {
     if (
       req.resourceType() == "font" ||
