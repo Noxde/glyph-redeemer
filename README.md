@@ -8,7 +8,7 @@
 
 <h1 align="center">Warframe Glyph Redeemer</h1>
 
-Thanks [Voltage](https://forums.warframe.com/profile/1419671-voltage/) for updating the [list of codes](https://forums.warframe.com/topic/992008-free-promocodes-and-glyphs-all-platforms/) on the warframe forums, if it weren't for this this would not been possible.
+Thanks [Voltage](https://forums.warframe.com/profile/1419671-voltage/) for updating the [list of codes](https://forums.warframe.com/topic/992008-free-promocodes-and-glyphs-all-platforms/) on the warframe forums, if it weren't for this this would not have been possible.
 
 ## Table of Contents
 
