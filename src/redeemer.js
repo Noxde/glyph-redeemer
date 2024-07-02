@@ -69,11 +69,10 @@ module.exports = async function redeemer(codes, cookies, path) {
     text: `Successfully logged in as ${username}`,
   });
 
-  const log = readLog();
-  codes = codes
-    .map((x) => x.code)
-    .filter((x) => !log.find((y) => y?.code === x));
-  console.log(`Found ${codes.length} new codes to redeem\n`);
+  let total = codes.length;
+  let codesTried = 0;
+  let amount = 1;
+  let captchaFails = 0;
 
   for (let code of codes) {
     console.time("It took");
@@ -135,16 +134,11 @@ module.exports = async function redeemer(codes, cookies, path) {
           logError(message);
       }
 
-      if (message.includes("you already redeemed a code")) {
-        codeSpinner.error({
-          text: `Already claimed ${code}`,
-        });
-        addLog(code, "Already claimed");
-      } else {
-        codeSpinner.error({
-          text: `Failed to redeem ${code}`,
-        });
-        addLog(code, "Failed to redeem possibly non existent or expired code");
+      if (captchaFails > 5) {
+        console.log(
+          "\nThere were 5 captchas, please try to use the program later"
+        );
+        return exitProgram();
       }
     }
 
@@ -152,8 +146,18 @@ module.exports = async function redeemer(codes, cookies, path) {
     console.log(`${codes.length - 1} Codes remaining\n`);
 
     codes = codes.filter((x) => x !== code);
-    console.log("Trying next code in 3 seconds.");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // Incremental cooldown each quarter of the codes to avoid rate limit; Looks like it works. It might be possible to reduce the cooldown
+    if (total > 100 && codesTried == Math.floor(total / 4)) {
+      let cooldown = 1 * amount;
+      codesTried = 0;
+      console.log(`Waiting ${cooldown} minute to avoid rate limit.`);
+      amount++;
+      await new Promise((resolve) => setTimeout(resolve, cooldown * 60 * 1000));
+    } else {
+      console.log("Trying next code in 3 seconds.");
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      codesTried++;
+    }
   }
   await browser.close();
 };
