@@ -57,16 +57,7 @@ module.exports = async function redeemer(codes, cookies, path) {
       loginSpinner.error({
         text: "Failed to login into account, update your cookies and try again",
       });
-      if (process.platform === "win32") {
-        await readline
-          .createInterface({
-            input: process.stdin,
-            output: process.stdout,
-          })
-          .question("Press enter to close the program...");
-
-        process.exit(1);
-      }
+      await exitProgram();
     });
 
   let username = await page.$eval(
