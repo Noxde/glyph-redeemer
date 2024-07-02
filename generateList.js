@@ -15,7 +15,7 @@ const getCodes = require("./codeUpdater");
   );
 
   let html = ``;
-  for (let i = 0; i < codes.length; i += 5) {
+  for (let i = 0; i < codes.length; i += 4) {
     let newRow = `<thead>
       <tr>
         <th>
@@ -38,11 +38,6 @@ const getCodes = require("./codeUpdater");
             <img width="100px" src="${codes[i + 3]?.img}"/>
           </a>
         </th>
-        <th>
-          <a href="https://warframe.com/promocode?code=${codes[i + 4]?.code}">
-            <img width="100px" src="${codes[i + 4]?.img}"/>
-          </a>
-        </th>
       </tr>
     </thead>
     <tbody>
@@ -51,7 +46,6 @@ const getCodes = require("./codeUpdater");
         <td>${codes[i + 1]?.code}</td>
         <td>${codes[i + 2]?.code}</td>
         <td>${codes[i + 3]?.code}</td>
-        <td>${codes[i + 4]?.code}</td>
       </tr>
     </tbody>\n`;
     html += newRow;
