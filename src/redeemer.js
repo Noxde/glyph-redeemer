@@ -97,9 +97,43 @@ module.exports = async function redeemer(codes, cookies, path) {
       codeSpinner.success({
         text: `${code} redeemed successfully\n`,
       });
+      logCode(code, `Claimed now`);
     } else {
       let alert = await page.waitForSelector(".alert-danger li");
       let message = await alert.evaluate((el) => el.textContent);
+      message = message.toLowerCase();
+
+      switch (message) {
+        case redeemed:
+        // fall through
+        case invalidRedeemed:
+          codeSpinner.error({
+            text: `Already claimed ${code}`,
+          });
+          logCode(code, "Already claimed");
+          break;
+        case invalid:
+          codeSpinner.error({
+            text: `Failed to redeem ${code}`,
+          });
+          logError(
+            `Failed to redeem ${code}: possibly non existent or expired code`
+          );
+          break;
+        case captcha:
+          codeSpinner.error({
+            text: "Captcha failed",
+          });
+          logError(message);
+          captchaFails += 1;
+          break;
+        default:
+          console.log(message);
+          codeSpinner.error({
+            text: "An error ocurred, if you are using a vpn try to disable it before using this",
+          });
+          logError(message);
+      }
 
       if (message.includes("you already redeemed a code")) {
         codeSpinner.error({
