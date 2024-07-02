@@ -2035,7 +2035,7 @@ After completing the code redemption, the application will remove the downloaded
 This application is designed for single-use code redeeming. However, I plan to add the following features in the future to enhance usability:
 
 - **Redeem Multiple Codes:** Allow users to redeem multiple codes at once for faster redeeming.
-- **Code List Updates:** Remove the need to use the codes from the repo and get the codes from the forums.
+- ~**Code List Updates:** Remove the need to use the codes from the repo and get the codes from the forums.~
 - **Remove the need to install chromium:** The program should first try to find your already installed browser, for now this is easier as it is.
 - **Simpler logging in:** Removing the need of a cookie editor, just simply login through the program.
 
