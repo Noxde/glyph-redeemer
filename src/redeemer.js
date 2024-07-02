@@ -1,27 +1,10 @@
 const puppeteer = require("puppeteer");
 const { createSpinner } = require("nanospinner");
-const { readFileSync } = require("fs");
-const path = require("path");
-const { addLog, readLog } = require("./logger");
-const readline = require("readline/promises");
+const { logCode, logError } = require("./logger");
+const exitProgram = require("./exitProgram");
+const { redeemed, invalid, invalidRedeemed, captcha } = require("./errors");
 
-const codesPath = process.pkg
-  ? path.join(path.dirname(process.execPath), "config", "codes.txt")
-  : path.join(__dirname, "..", "config/codes.txt");
-
-let codes = readFileSync(codesPath, {
-  encoding: "utf-8",
-})
-  .split("\n")
-  .filter((x) => x !== "");
-
-module.exports = async function redeemer(cookies, path) {
-  if (!codes[0]) {
-    throw new Error(
-      "There are no codes to redeem, make sure that codes.txt is not empty"
-    );
-  }
-
+module.exports = async function redeemer(codes, cookies, path) {
   const loginSpinner = createSpinner("Trying to login").start();
   const browser = await puppeteer.launch({
     headless: "new",
@@ -39,11 +22,11 @@ module.exports = async function redeemer(cookies, path) {
   });
 
   const [page] = await browser.pages();
-  await page.setExtraHTTPHeaders({ DNT: "1" });
 
   await page.setCookie(...cookies);
-  await page.setRequestInterception(true);
 
+  await page.setExtraHTTPHeaders({ DNT: "1" });
+  await page.setRequestInterception(true);
   page.on("request", (req) => {
     if (
       req.resourceType() == "font" ||
@@ -74,16 +57,7 @@ module.exports = async function redeemer(cookies, path) {
       loginSpinner.error({
         text: "Failed to login into account, update your cookies and try again",
       });
-      if (process.platform === "win32") {
-        await readline
-          .createInterface({
-            input: process.stdin,
-            output: process.stdout,
-          })
-          .question("Press enter to close the program...");
-
-        process.exit(1);
-      }
+      await exitProgram();
     });
 
   let username = await page.$eval(
@@ -95,9 +69,10 @@ module.exports = async function redeemer(cookies, path) {
     text: `Successfully logged in as ${username}`,
   });
 
-  const log = readLog();
-  codes = codes.filter((x) => !log.find((y) => y?.code === x));
-  console.log(`Found ${codes.length} codes to redeem\n`);
+  let total = codes.length;
+  let codesTried = 0;
+  let amount = 1;
+  let captchaFails = 0;
 
   for (let code of codes) {
     console.time("It took");
@@ -121,20 +96,49 @@ module.exports = async function redeemer(cookies, path) {
       codeSpinner.success({
         text: `${code} redeemed successfully\n`,
       });
+      logCode(code, `Claimed now`);
     } else {
       let alert = await page.waitForSelector(".alert-danger li");
       let message = await alert.evaluate((el) => el.textContent);
+      message = message.toLowerCase();
 
-      if (message.includes("you already redeemed a code")) {
-        codeSpinner.error({
-          text: `Already claimed ${code}`,
-        });
-        addLog(code, "Already claimed");
-      } else {
-        codeSpinner.error({
-          text: `Failed to redeem ${code}`,
-        });
-        addLog(code, "Failed to redeem possibly non existent or expired code");
+      switch (message) {
+        case redeemed:
+        // fall through
+        case invalidRedeemed:
+          codeSpinner.error({
+            text: `Already claimed ${code}`,
+          });
+          logCode(code, "Already claimed");
+          break;
+        case invalid:
+          codeSpinner.error({
+            text: `Failed to redeem ${code}`,
+          });
+          logError(
+            `Failed to redeem ${code}: possibly non existent or expired code`
+          );
+          break;
+        case captcha:
+          codeSpinner.error({
+            text: "Captcha failed",
+          });
+          logError(message);
+          captchaFails += 1;
+          break;
+        default:
+          console.log(message);
+          codeSpinner.error({
+            text: "An error ocurred, if you are using a vpn try to disable it before using this",
+          });
+          logError(message);
+      }
+
+      if (captchaFails > 5) {
+        console.log(
+          "\nThere were 5 captchas, please try to use the program later"
+        );
+        return exitProgram();
       }
     }
 
@@ -142,8 +146,18 @@ module.exports = async function redeemer(cookies, path) {
     console.log(`${codes.length - 1} Codes remaining\n`);
 
     codes = codes.filter((x) => x !== code);
-    console.log("Trying next code in 3 seconds.");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // Incremental cooldown each quarter of the codes to avoid rate limit; Looks like it works. It might be possible to reduce the cooldown
+    if (total > 100 && codesTried == Math.floor(total / 4)) {
+      let cooldown = 1 * amount;
+      codesTried = 0;
+      console.log(`Waiting ${cooldown} minute to avoid rate limit.`);
+      amount++;
+      await new Promise((resolve) => setTimeout(resolve, cooldown * 60 * 1000));
+    } else {
+      console.log("Trying next code in 3 seconds.");
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      codesTried++;
+    }
   }
   await browser.close();
 };
