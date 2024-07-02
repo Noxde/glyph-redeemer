@@ -25,20 +25,20 @@ module.exports = async function redeemer(codes, cookies, path) {
 
   await page.setCookie(...cookies);
 
-  await page.setExtraHTTPHeaders({ DNT: "1" });
-  await page.setRequestInterception(true);
-  page.on("request", (req) => {
-    if (
-      req.resourceType() == "font" ||
-      req.resourceType() == "image" ||
-      req.resourceType() == "stylesheet" ||
-      req.resourceType() == "media"
-    ) {
-      req.abort();
-    } else {
-      req.continue();
-    }
-  });
+  // await page.setExtraHTTPHeaders({ DNT: "1" });
+  // await page.setRequestInterception(true);
+  // page.on("request", (req) => {
+  //   if (
+  //     req.resourceType() == "font" ||
+  //     req.resourceType() == "image" ||
+  //     req.resourceType() == "stylesheet" ||
+  //     req.resourceType() == "media"
+  //   ) {
+  //     req.abort();
+  //   } else {
+  //     req.continue();
+  //   }
+  // });
   await page.goto("https://www.warframe.com/", {
     waitUntil: "domcontentloaded",
   });
@@ -154,8 +154,8 @@ module.exports = async function redeemer(codes, cookies, path) {
       amount++;
       await new Promise((resolve) => setTimeout(resolve, cooldown * 60 * 1000));
     } else {
-      console.log("Trying next code in 3 seconds.");
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      console.log("Trying next code in 5 seconds.");
+      await new Promise((resolve) => setTimeout(resolve, 5000));
       codesTried++;
     }
   }
