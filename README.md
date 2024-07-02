@@ -8,8 +8,6 @@
 
 <h1 align="center">Warframe Glyph Redeemer</h1>
 
-**WARNING: If you are thinking about using this software keep in mind you might get "banned" from Warframe's website though it's highly unlikely it happened to me because while testing I used too many codes too fast, I didn't have any issues using it normally. You will still be able to play the game but you might not be able to access the website on the wifi network that you used this software on for an undefined amount of time (for me it resolved itself after 2 days). This just happened to me while testing this making some changes to it so you should not have any problems ![Access denied to warframe website](https://i.imgur.com/xZfzujN.png)**
-
 Thanks [Voltage](https://forums.warframe.com/profile/1419671-voltage/) for updating the [list of codes](https://forums.warframe.com/topic/992008-free-promocodes-and-glyphs-all-platforms/) on the warframe forums, if it weren't for this this would not have all the updated codes
 
 ## Table of Contents
