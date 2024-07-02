@@ -29,7 +29,7 @@ The Warframe Glyph Redeemer is a Node.js application powered by Puppeteer, desig
 
 ## 2. Prerequisites
 
-You will only need this if you want to contribute, if you simply want to use the Warframe Glyph Redeemer without dealing with the installation process skip to [Download](#4-download)
+You will only need this if you want to contribute, if you simply want to use Glyph Redeemer skip to [Download](#4-download)
 
 Before using the Warframe Glyph Redeemer, ensure you have the following prerequisites:
 
