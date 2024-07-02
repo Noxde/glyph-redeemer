@@ -4,8 +4,9 @@ const fs = require("fs");
 const tar = require("tar");
 const extract = require("extract-zip");
 const path = require("path");
+const readline = require("readline/promises");
 
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 const { createSpinner } = require("nanospinner");
 
 async function isLatest(currentVersion) {
@@ -36,10 +37,33 @@ async function update(assets) {
     "The program will now close to apply the update, you should open it again."
   );
   if (process.platform == "win32") {
-    // TODO:
-    const script = `
-    `;
-    exec(script).unref();
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    await rl.question("Press enter to continue...");
+
+    const extractPath = process?.pkg
+      ? path.join(process.execPath, "..", "update", "glyph-redeemer-win.exe")
+      : path.join(__dirname, "update", "glyph-redeemer-win.exe");
+    const outPath = process?.pkg
+      ? path.join(process.execPath, "..", "glyph-redeemer-win.exe")
+      : path.join(__dirname, "glyph-redeemer-win.exe");
+
+    const moveShellCommand = spawn(
+      `timeout /t 4 /nobreak > nul && move "${extractPath}" "${outPath}" && RD /S /Q ${path.join(
+        extractPath,
+        ".."
+      )}`,
+      [],
+      {
+        detached: true,
+        stdio: ["ignore", "ignore", "ignore"],
+        shell: true,
+      }
+    );
+    moveShellCommand.unref();
   } else {
     const script = `
     sleep 1; mv ./update/glyph-redeemer-linux ./glyph-redeemer-linux; rm -rf ./update/;
