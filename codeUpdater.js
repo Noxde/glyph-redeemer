@@ -21,5 +21,5 @@ module.exports = async function getCodes() {
     };
   });
 
-  return codes;
+  return jsonCodes.toArray();
 };
