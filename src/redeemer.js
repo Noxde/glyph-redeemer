@@ -1,13 +1,10 @@
 const puppeteer = require("puppeteer");
 const { createSpinner } = require("nanospinner");
-const { addLog, readLog } = require("./logger");
-const getCodes = require("../codeUpdater");
+const { logCode, logError } = require("./logger");
+const exitProgram = require("./exitProgram");
+const { redeemed, invalid, invalidRedeemed, captcha } = require("./errors");
 
-module.exports = async function redeemer(cookies, path) {
-  const codesSpinner = createSpinner("Fetching codes").start();
-  let codes = await getCodes();
-  codesSpinner.success();
-
+module.exports = async function redeemer(codes, cookies, path) {
   const loginSpinner = createSpinner("Trying to login").start();
   const browser = await puppeteer.launch({
     headless: "new",
