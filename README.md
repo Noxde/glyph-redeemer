@@ -14,16 +14,14 @@ Thanks [Voltage](https://forums.warframe.com/profile/1419671-voltage/) for updat
 
 - [1. Introduction](#1-introduction)
 - [2. Prerequisites](#2-prerequisites)
-- [3. Installation](#3-installation)
+- [3. Contributing](#3-contributing)
 - [4. Download](#4-download)
 - [5. Usage](#5-usage)
-- [6. Roadmap](#6-roadmap)
-- [7. Contributing](#7-contributing)
-- [8. License](#8-license)
+- [6. License](#6-license)
 
 ## 1. Introduction
 
-The Warframe Glyph Redeemer is a Node.js application powered by Puppeteer, designed to automate the process of logging into your Warframe account and redeeming all available glyph codes.
+Glyph Redeemer is a Node.js application powered by Puppeteer, designed to automate the process of redeeming all the available glyph codes.
 
 **Disclaimer:** I originally developed this application for personal use to redeem Warframe glyph codes, feel free to point out any bugs or problems. Please be aware that this application interacts with your Warframe account and relies on web scraping techniques. The use of automated tools like this may potentially violate Warframe's Terms of Service.
 
@@ -31,14 +29,10 @@ The Warframe Glyph Redeemer is a Node.js application powered by Puppeteer, desig
 
 You will only need this if you want to contribute, if you simply want to use Glyph Redeemer skip to [Download](#4-download)
 
-Before using the Warframe Glyph Redeemer, ensure you have the following prerequisites:
-
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) (including npm)
 
-## 3. Installation
-
-To get started, follow these installation steps:
+## 3. Contributing
 
 1. Clone the repository:
 
@@ -64,11 +58,17 @@ To get started, follow these installation steps:
    $ npm start
    ```
 
+5. If you want to build the application you can do it by running:
+
+   ```bash
+   $ npm run build
+   ```
+
+   This will make an executable for windows, linux and mac
+
 ## 4. Download
 
 You can download the pre-built executable for your operating system from the [Releases](https://github.com/Noxde/glyph-redeemer/releases) section of this repository.
-
-Choose the version that matches your operating system and download it.
 
 Additionally, you will need a browser extension for cookie management based on your preferred web browser like
 [Cookie Editor](https://cookie-editor.cgagnier.ca/). It's available for Chrome, FireFox, Safari, Edge and Opera
@@ -77,8 +77,6 @@ After installing cookie editor make sure to click on All sites when the extensio
 ![image](https://github.com/Noxde/glyph-redeemer/assets/70549780/bcd246a0-74ad-4c2f-8f2b-faac48d23533)
 
 ## 5. Usage
-
-Using the Warframe Glyph Redeemer is straightforward:
 
 **Notes:**
 
@@ -98,30 +96,22 @@ Using the Warframe Glyph Redeemer is straightforward:
    glyph-redeemer/config/cookies.json
    ```
 
-4. You can customize what codes it will redeem modifying
+4. You are now prepared to start the Warframe Glyph Redeemer.
 
-   ```
-   glyph-redeemer/config/codes.txt
-   ```
-
-   Each code should be in a new line. By default it will come with all the codes available or you can download/copy the codes from the updated file from this repo.
-
-5. You are now prepared to start the Warframe Glyph Redeemer.
-
-6. The application will download Chromium to your AppData folder if you are on windows to use with Puppeteer and attempt to log in to your Warframe account.
+5. The application will download Chromium to your AppData folder if you are on windows to use with Puppeteer and attempt to log in to your Warframe account.</br>
    If you are on linux, chromium will be installed on `~/.local/share/glyphRedeemer` or mac `~/Library/Preferences/glyphRedeemer`
 
-7. It will then start redeeming the codes, displaying success or failure for each code.
+6. It will then start redeeming the codes, displaying success or failure for each code.
 
    ![Glyph Redeemer in Action](Images/glyph-redeemer_demo.gif)
 
-After completing the code redemption, the application will remove the downloaded Chromium.
+After trying to redeem all the codes, the application will ask you if you want to remove the downloaded Chromium.
 
 <details>
   <summary>
     <h3>Table of codes with images</h3>
   </summary>
-<table><thead>
+  <table><thead>
       <tr>
         <th>
           <a href="https://warframe.com/promocode?code=6ixGatsu">
@@ -2030,20 +2020,7 @@ After completing the code redemption, the application will remove the downloaded
 </table>
 </details>
 
-## 6. Roadmap
-
-This application is designed for single-use code redeeming. However, I plan to add the following features in the future to enhance usability:
-
-- **Redeem Multiple Codes:** Allow users to redeem multiple codes at once for faster redeeming.
-- ~**Code List Updates:** Remove the need to use the codes from the repo and get the codes from the forums.~
-- **Remove the need to install chromium:** The program should first try to find your already installed browser, for now this is easier as it is.
-- **Simpler logging in:** Removing the need of a cookie editor, just simply login through the program.
-
-## 7. Contributing
-
-Contributions are welcome. Feel free to improve on the project.
-
-## 8. License
+## 6. License
 
 This project is licensed under the [MIT License](LICENSE).
 
