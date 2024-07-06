@@ -86,9 +86,11 @@ module.exports = async function redeemer(codes, cookies, path) {
     await page.goto(`https://www.warframe.com/promocode?code=${code}`);
     let codeSpinner = createSpinner(`Trying to redeem ${code}`).start();
 
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     await Promise.all([
       page.waitForNavigation({
-        waitUntil: "domcontentloaded",
+        waitUntil: "networkidle0",
         timeout: 20_000,
       }),
       page.click("#btnSubmit"),
