@@ -10,7 +10,7 @@ const { readCodeLog } = require("./logger");
 const getCodes = require("../codeUpdater");
 const redeemer = require("./redeemer.js");
 
-const version = "1.3.0"; // Lower version number for testing purposes this is actually 1.2.3 with changes
+const version = "1.3.1"; // Lower version number for testing purposes this is actually 1.2.3 with changes
 // If its not windows and not running on a terminal then exit
 if (!process.stdout.isTTY && !process.env.APPDATA) {
   VTexec("echo 'Please run the script from the terminal.'");
