@@ -136,9 +136,8 @@ module.exports = async function redeemer(codes, cookies, path) {
           captchaFails += 1;
           break;
         default:
-          console.log(message);
           codeSpinner.error({
-            text: "An error ocurred, if you are using a vpn try to disable it before using this",
+            text: "An error ocurred",
           });
           logError(message);
       }
@@ -155,19 +154,8 @@ module.exports = async function redeemer(codes, cookies, path) {
     console.log(`${codes.length - 1} Codes remaining\n`);
 
     codes = codes.filter((x) => x !== code);
-    // Incremental cooldown each quarter of the codes to avoid rate limit; Looks like it works. It might be possible to reduce the cooldown
-    if (total > 100 && codesTried == Math.floor(total / 4)) {
-      // let cooldown = 1 * amount;
-      codesTried = 0;
-      // console.log(`Waiting ${cooldown} minute to avoid rate limit.`);
-      console.log(`Waiting 1 minute to avoid rate limit.`);
-      amount++;
-      await new Promise((resolve) => setTimeout(resolve, 60 * 1000));
-    } else {
-      console.log("Trying next code in 3 seconds.");
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      codesTried++;
-    }
+    console.log("Trying next code in 1 second.");
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
   await browser.close();
 };
