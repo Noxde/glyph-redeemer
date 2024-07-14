@@ -11,15 +11,17 @@ module.exports = async function redeemer(codes, cookies, path) {
     executablePath: path,
   });
 
-  cookies = cookies.map((x) => {
-    if (x.partitionKey === null) {
-      x.partitionKey = ""; // Fix partition key for puppeteer
-    }
-    if (x.sameSite === null) {
-      x.sameSite = ""; // Fix sameSite for puppeteer
-    }
-    return x;
-  });
+  cookies = cookies
+    .map((x) => {
+      if (x.partitionKey === null) {
+        x.partitionKey = ""; // Fix partition key for puppeteer
+      }
+      if (x.sameSite === null) {
+        x.sameSite = ""; // Fix sameSite for puppeteer
+      }
+      return x;
+    })
+    .filter((x) => x.name !== "language"); // Remove the language cookie to only get errors in english
 
   const [page] = await browser.pages();
   await page.setUserAgent(
