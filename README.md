@@ -27,12 +27,13 @@ Glyph Redeemer is a Node.js application powered by Puppeteer, designed to automa
 
 ## 2. Prerequisites
 
-You will only need this if you want to contribute, if you simply want to use Glyph Redeemer skip to [Download](#4-download)
+You will only need this if you want to contribute, **if you simply want to use Glyph Redeemer skip to [Download](#4-download)**
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) (including npm)
 
 ## 3. Contributing
+This is only if you want to contribute to this repository or make changes to the code for yourself, if you only want to use this software go to [Download](#4-dowload).
 
 1. Clone the repository:
 
