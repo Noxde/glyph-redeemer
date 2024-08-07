@@ -11,6 +11,11 @@ module.exports = async function redeemer(codes, cookies, path) {
     executablePath: path,
   });
 
+  if (!cookies.length)
+    throw Error(
+      "Cookies should be an array, make sure you are pasting Warframe's site cookies in cookies.json"
+    );
+
   cookies = cookies
     .map((x) => {
       if (x.partitionKey === null) {
@@ -78,9 +83,6 @@ module.exports = async function redeemer(codes, cookies, path) {
     text: `Successfully logged in as ${username}`,
   });
 
-  let total = codes.length;
-  let codesTried = 0;
-  let amount = 1;
   let captchaFails = 0;
 
   for (let code of codes) {
