@@ -64,9 +64,14 @@ async function update(assets) {
       }
     );
     moveShellCommand.unref();
-  } else {
+  } else if (process.platform == "linux") {
     const script = `
     sleep 1; mv ./update/glyph-redeemer-linux ./glyph-redeemer-linux; rm -rf ./update/;
+    `;
+    exec(script).unref();
+  } else {
+    const script = `
+    sleep 1; mv ./update/glyph-redeemer-macos ./glyph-redeemer-macos; rm -rf ./update/;
     `;
     exec(script).unref();
   }
