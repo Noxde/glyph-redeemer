@@ -3,7 +3,6 @@ const path = require("path");
 const { createSpinner } = require("nanospinner");
 const { VTexec } = require("open-term");
 
-const { installChromium, removeChromium } = require("./installer.js");
 const { isLatest, update } = require("./updater.js");
 const exitProgram = require("./exitProgram.js");
 const { readCodeLog, logError } = require("./logger");
@@ -58,17 +57,9 @@ const cookiesPath = process.pkg
     }
     console.log(`Found ${codes.length} new codes to redeem\n`);
 
-    const chromiumSpinner = createSpinner("Installing chromium").start();
-    const chromiumPath = await installChromium();
-    chromiumSpinner.success({
-      text: "Chromium installed",
-    });
-
     console.time("No codes left to redeem. Time taken");
     await redeemer(codes, cookies, debuggingPort);
     console.timeEnd("No codes left to redeem. Time taken");
-
-    await removeChromium();
 
     exitProgram();
   } catch (error) {
