@@ -88,12 +88,13 @@ After installing cookie editor make sure to click on All sites when the extensio
 
 6. Glyph redeemer now will connect to your browser and start redeeming the codes, displaying success or failure for each code.
 
-   > [!IMPORTANT]
-   > You need to leave the browser on the warframe tab to allow the script to work
+  > [!IMPORTANT]
+  > You need to leave the browser on the warframe tab to allow the script to work
 
    ![Glyph Redeemer in Action](Images/glyph-redeemer_demo.gif)
 
-   > [!NOTE] > **Glyph Redeemer may exit before redeeming all the codes if it encounters multiple captchas to avoid being IP banned. if this happens, try running Glyph Redeemer later.**
+  > [!NOTE]
+  > **Glyph Redeemer may exit before redeeming all the codes if it encounters multiple captchas to avoid being IP banned. if this happens, try running Glyph Redeemer later.**
 
 <details>
   <summary>
