@@ -69,7 +69,7 @@ After installing cookie editor make sure to click on All sites when the extensio
    - On the terminal now enter
 
      ```
-       ./browser.exe --remote-debugging-port=9222
+       ./browser.exe --remote-debugging-port=9222 --user-data-dir="%LOCALAPPDATA%\glyph-redeemer-profile"
      ```
 
      (replace browser with your browser's executable name)
@@ -79,12 +79,12 @@ After installing cookie editor make sure to click on All sites when the extensio
    - Open a terminal and do
 
      ```
-     browser --remote-debugging-port=9222
+     browser --remote-debugging-port=9222 --user-data-dir="$HOME/glyph-redeemer-profile"
      ```
 
      (browser will depend on your browser executable)
 
-5. Start glyph redeemer and enter your debugging port (you can use anything other than 9222 if you want when starting your browser)
+5. After setting up the new profile you can start glyph redeemer and enter your debugging port (you can use anything other than 9222 if you want when starting your browser)
 
 6. Glyph redeemer now will connect to your browser and start redeeming the codes, displaying success or failure for each code.
 
@@ -93,8 +93,7 @@ After installing cookie editor make sure to click on All sites when the extensio
 
    ![Glyph Redeemer in Action](Images/glyph-redeemer_demo.gif)
 
-   > [!NOTE]
-   > **Glyph Redeemer may exit before redeeming all the codes if it encounters multiple captchas to avoid being IP banned. if this happens, try running Glyph Redeemer later.**
+   > [!NOTE] > **Glyph Redeemer may exit before redeeming all the codes if it encounters multiple captchas to avoid being IP banned. if this happens, try running Glyph Redeemer later.**
 
 <details>
   <summary>
