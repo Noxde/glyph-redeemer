@@ -4,7 +4,7 @@ const { writeFileSync } = require("fs");
 const getCodes = require("./codeUpdater");
 
 (async function () {
-  const codes = await getCodes();
+  const codes = await getCodes(9222);
 
   let list = "";
   codes.sort((a, b) => (a.code.toLowerCase() < b.code.toLowerCase() ? -1 : 1));

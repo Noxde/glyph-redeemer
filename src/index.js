@@ -9,6 +9,7 @@ const exitProgram = require("./exitProgram.js");
 const { readCodeLog, logError } = require("./logger");
 const getCodes = require("../codeUpdater");
 const redeemer = require("./redeemer.js");
+const readline = require("readline/promises");
 
 const version = "1.3.3";
 // If its not windows and not running on a terminal then exit
@@ -29,6 +30,8 @@ const cookiesPath = process.pkg
       await update(isUpdated.assets);
     }
 
+    const debuggingPort = await getDebuggingPort();
+
     let cookies;
     try {
       cookies = require(cookiesPath);
@@ -41,7 +44,7 @@ const cookiesPath = process.pkg
 
     const log = readCodeLog();
     const codesSpinner = createSpinner("Fetching codes").start();
-    let codes = await getCodes();
+    let codes = await getCodes(debuggingPort);
     codesSpinner.success({
       text: "Codes fetched",
     });
@@ -62,7 +65,7 @@ const cookiesPath = process.pkg
     });
 
     console.time("No codes left to redeem. Time taken");
-    await redeemer(codes, cookies, chromiumPath);
+    await redeemer(codes, cookies, debuggingPort);
     console.timeEnd("No codes left to redeem. Time taken");
 
     await removeChromium();
@@ -75,3 +78,11 @@ const cookiesPath = process.pkg
     process.exit(1);
   }
 })();
+
+async function getDebuggingPort() {
+  const rl = readline.createInterface(process.stdin, process.stdout);
+
+  const a = await rl.question("Enter your debugging port:");
+  rl.close();
+  return a;
+}

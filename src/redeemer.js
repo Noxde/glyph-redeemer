@@ -4,11 +4,17 @@ const { logCode, logError } = require("./logger");
 const exitProgram = require("./exitProgram");
 const { redeemed, invalid, invalidRedeemed, captcha } = require("./errors");
 
-module.exports = async function redeemer(codes, cookies, path) {
+module.exports = async function redeemer(codes, cookies, debuggingPort) {
   const loginSpinner = createSpinner("Trying to login").start();
-  const browser = await puppeteer.launch({
-    headless: "new",
-    executablePath: path,
+  const browser = await puppeteer.connect({
+    browserURL: `http://127.0.0.1:${debuggingPort}`,
+  });
+
+  process.on("SIGINT", async () => {
+    console.log("Closing browser");
+    await browser.close();
+    console.log("Exiting");
+    process.exit(0);
   });
 
   if (!cookies.length)
@@ -148,9 +154,9 @@ module.exports = async function redeemer(codes, cookies, path) {
 
       if (captchaFails > 5) {
         console.log(
-          "\nThere were 5 captchas, please try to use the program later"
+          "\nThere were 5 captchas, please try to use the program again later"
         );
-        return exitProgram();
+        return exitProgram(browser);
       }
     }
 
