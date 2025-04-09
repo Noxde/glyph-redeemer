@@ -10,7 +10,7 @@ const getCodes = require("../codeUpdater");
 const redeemer = require("./redeemer.js");
 const readline = require("readline/promises");
 
-const version = "1.3.3";
+const version = "1.4.0";
 // If its not windows and not running on a terminal then exit
 if (!process.stdout.isTTY && !process.env.APPDATA) {
   VTexec("echo 'Please run the script from the terminal.'");
