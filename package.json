@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "uglify": "uglifyjs-folder src -eo out -x .js ",
-    "build": "rm -rf glyph-redeemer && npm run uglify && pkg . -t node18-linux,node18-win32,node18-macos --compress GZip",
-    "postbuild": "cd ./glyph-redeemer && mkdir config && cd config && touch cookies.json && cp ../../config/codes.txt ./codes.txt",
+    "build": "rm -rf glyph-redeemer && npm run uglify && pkg . -t node18-linux,node18-win32,node18-macos --compress GZip --options no-warnings=ExperimentalWarning",
+    "postbuild": "cd ./glyph-redeemer && mkdir config && cd config && touch cookies.json",
     "start": "node src/index.js"
   },
   "dependencies": {
