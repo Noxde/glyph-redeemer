@@ -65,6 +65,7 @@ module.exports = async function redeemer(codes, cookies, debuggingPort) {
   });
 
   let captchaFails = 0;
+  let codesTried = 0;
 
   for (let code of codes) {
     console.time("It took");
@@ -80,6 +81,7 @@ module.exports = async function redeemer(codes, cookies, debuggingPort) {
       }),
       page.click("#btnSubmit"),
     ]);
+    codesTried++;
 
     let successContainer = await page.waitForSelector("#basicTextContain");
     let isSuccess = await successContainer.evaluate((e) =>
@@ -137,10 +139,16 @@ module.exports = async function redeemer(codes, cookies, debuggingPort) {
 
     console.timeEnd("It took");
     console.log(`${codes.length - 1} Codes remaining\n`);
-
     codes = codes.filter((x) => x !== code);
-    console.log("Trying next code in 1 second.");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    if (codesTried % 10 === 0) {
+      console.log("Waiting 10 seconds to continue.");
+      await new Promise((resolve) => setTimeout(resolve, 10_000));
+      continue;
+    }
+
+    console.log(`Trying next code in 5 seconds.`);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
   await browser.close();
 };
