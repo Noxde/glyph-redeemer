@@ -80,7 +80,7 @@ module.exports = async function redeemer(codes, cookies, debuggingPort) {
         waitUntil: "networkidle0",
         timeout: 20_000,
       }),
-      page.click("#btnSubmit"),
+      page.click("#promoCode-submit"),
     ]);
     codesTried++;
 
