@@ -84,12 +84,9 @@ module.exports = async function redeemer(codes, cookies, debuggingPort) {
     ]);
     codesTried++;
 
-    let successContainer = await page.waitForSelector("#basicTextContain");
-    let isSuccess = await successContainer.evaluate((e) =>
-      e.textContent.includes("Thanks for redeeming your code!")
-    );
+    let successContainer = await page.$("#modal");
 
-    if (isSuccess) {
+    if (successContainer) {
       codeSpinner.success({
         text: `${code} redeemed successfully\n`,
       });
