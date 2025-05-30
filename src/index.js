@@ -93,6 +93,27 @@ const keypress = async () => {
         break;
     }
     
+    // Create an empty cookies file if it doesn't exist
+    if (!fs.existsSync(cookiesPath)) {
+      try {
+        fs.writeFileSync(cookiesPath, '', 'utf8'); // Write an empty JSON object to the file
+        console.log(`Created empty cookies file because it didnt exist at: ${cookiesPath}`);
+        console.log(`Read the readme on how to import your cookies.`);
+      } catch (err) {
+        console.error(`Could not create the cookies file: ${err.message}`);
+        return exitProgram();
+      }
+    }
+    
+    let cookies;
+    try {
+      cookies = require(cookiesPath);
+    } catch (err) {
+      console.error("Could not find the cookies file, make sure its in the config folder and the file is not empty.");
+      console.error("Make sure you read the readme on how to import your cookies.");
+      return exitProgram();
+    }
+
     if (launchBrowser) {
       if (browserPathToUse) {
         spawnBrowser(browserPathToUse, debuggingPort);
@@ -100,16 +121,6 @@ const keypress = async () => {
         console.error(`Browser path not configured for platform: ${process.platform}. Please update config.json.`);
         logError(`Browser path not configured for platform: ${process.platform}.`);
       }
-    }
-
-    let cookies;
-    try {
-      cookies = require(cookiesPath);
-    } catch (err) {
-      console.error(
-          "Could not find the cookies file, make sure its in the config folder and the file is not empty."
-      );
-      return exitProgram();
     }
 
     const log = readCodeLog();
