@@ -3,11 +3,14 @@ const { createSpinner } = require("nanospinner");
 const { logCode, logError } = require("./logger");
 const exitProgram = require("./exitProgram");
 const { redeemed, invalid, invalidRedeemed, captcha } = require("./errors");
+const {getConfig} = require("./config");
 
-module.exports = async function redeemer(codes, cookies, debuggingPort) {
+module.exports = async function redeemer(codes, cookies) {
+  let config = getConfig();
+  
   const loginSpinner = createSpinner("Trying to login").start();
   const browser = await puppeteer.connect({
-    browserURL: `http://127.0.0.1:${debuggingPort}`,
+    browserURL: `http://127.0.0.1:${config.DebuggingPort}`,
   });
 
   process.on("SIGINT", async () => {
@@ -122,16 +125,19 @@ module.exports = async function redeemer(codes, cookies, debuggingPort) {
           break;
         default:
           codeSpinner.error({
-            text: "An error ocurred",
+            text: "An error occurred",
           });
           logError(message);
       }
 
-      if (captchaFails > 5) {
-        console.log(
-          "\nThere were 5 captchas, please try to use the program again later"
-        );
-        return exitProgram(browser);
+      if (config.CaptchaFailTimeoutInsteadOfExit && captchaFails > config.CaptchaMaxFails - 1) {
+        console.log(`\nThere were ${captchaFails} captchas, waiting ${config.CaptchaTimeoutInMs / 1000}s to try again`);
+        await new Promise(resolve => setTimeout(resolve, config.CaptchaTimeoutInMs));
+      } else {
+        if (captchaFails > config.CaptchaMaxFails) {
+          console.log(`\nThere were ${captchaFails} captchas, exiting.`);
+          return exitProgram(browser);
+        }
       }
     }
 

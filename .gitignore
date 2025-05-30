@@ -4,3 +4,6 @@ list.html
 errors.log
 redeemed.log
 out
+/config
+/logs
+/.idea
