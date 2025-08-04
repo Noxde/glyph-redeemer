@@ -53,7 +53,7 @@ function getConfig() {
     const defaultConfig = {
         AutoStart: false,
         DebuggingPort: 9222,
-        LaunchBrowser: false,
+        LaunchBrowser: true,
         BrowserMaxConnectionTries: 5,
         BrowserWaitBetweenTriesMs: 500,
         BrowserPath: {
