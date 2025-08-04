@@ -21,7 +21,8 @@ if (!process.stdout.isTTY && !process.env.APPDATA) {
 }
 
 // Function to spawn the browser
-function spawnBrowser(browserPath, debuggingPort) {
+function spawnBrowser(debuggingPort) {
+  const { BrowserPath: browserPath } = config;
   try {
     console.log(`Attempting to launch browser: ${browserPath}`);
     const args = [
