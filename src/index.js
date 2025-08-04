@@ -115,8 +115,8 @@ const keypress = async () => {
     }
 
     if (launchBrowser) {
-      if (browserPathToUse) {
-        spawnBrowser(browserPathToUse, debuggingPort);
+      if (config.BrowserPath) {
+        spawnBrowser(debuggingPort);
       } else {
         console.error(`Browser path not configured. Please update config.json.`);
         logError(`Browser path not configured.`);
