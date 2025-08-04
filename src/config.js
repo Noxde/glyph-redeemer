@@ -28,25 +28,21 @@ function getConfig() {
     }
 
     // Determine default browser path based on platform
-    let defaultBrowserPathLinux = "/usr/bin/chromium"; // Common Linux path for Chromium
-    let defaultBrowserPathWindows = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"; // Common Windows path for Chrome
-    let defaultBrowserPathMac = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"; // Common macOS path for Chrome
-
     // Check for platform and set a fallback if no specific path is found in config
     let currentPlatformBrowserPath;
     switch (process.platform) {
         case "darwin": // macOS
-            currentPlatformBrowserPath = defaultBrowserPathMac;
+            currentPlatformBrowserPath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
             break;
         case "win32": // Windows
-            currentPlatformBrowserPath = defaultBrowserPathWindows;
+            currentPlatformBrowserPath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
             break;
-        case "linux": // Linux
-            currentPlatformBrowserPath = defaultBrowserPathLinux;
-            break;
-        default:
-            console.warn(`Unknown platform: ${process.platform}. Using generic Chromium path.`);
-            currentPlatformBrowserPath = defaultBrowserPathLinux; // Fallback
+        //case "linux": // Linux
+            //currentPlatformBrowserPath = "/usr/bin/chromium";
+            //break;
+        default: // Use linux as default
+            //console.warn(`Unknown platform: ${process.platform}. Using generic Chromium path.`);
+            currentPlatformBrowserPath = "/usr/bin/chromium"; // Fallback
     }
 
     // Define default config with platform-specific browser paths
