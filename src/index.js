@@ -34,6 +34,15 @@ function spawnBrowser(browserPath, debuggingPort) {
       stdio: "ignore",
     });
 
+    browserProcess.on("error", (error) => {
+      // Probably ENOENT
+      logError(`Failed to launch browser: ${error.message}`);
+      console.log(
+        `\nFailed to launch browser, check that your BrowserPath in config.json exists.`
+      );
+      process.exit(1);
+    });
+    
     browserProcess.unref();
     
     console.log(`Browser launched successfully with debugging port ${debuggingPort}.`);
