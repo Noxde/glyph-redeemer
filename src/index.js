@@ -75,23 +75,6 @@ const keypress = async () => {
     const debuggingPort = config.DebuggingPort;
     const launchBrowser = config.LaunchBrowser;
 
-    // Select the correct browser path based on the current platform from the config
-    let browserPathToUse;
-    switch (process.platform) {
-      case "darwin":
-        browserPathToUse = config.BrowserPath.mac;
-        break;
-      case "win32":
-        browserPathToUse = config.BrowserPath.windows;
-        break;
-      case "linux":
-        browserPathToUse = config.BrowserPath.linux;
-        break;
-      default:
-        console.warn(`Running on an unrecognized platform: ${process.platform}. Please manually specify 'BrowserPath' in config.json if browser launching fails.`);
-        browserPathToUse = config.BrowserPath.linux; // Fallback to Linux path if platform is unknown
-        break;
-    }
     
     // Create an empty cookies file if it doesn't exist
     if (!fs.existsSync(cookiesPath)) {
