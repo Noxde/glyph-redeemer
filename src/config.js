@@ -56,11 +56,7 @@ function getConfig() {
         LaunchBrowser: true,
         BrowserMaxConnectionTries: 5,
         BrowserWaitBetweenTriesMs: 500,
-        BrowserPath: {
-            linux: defaultBrowserPathLinux,
-            windows: defaultBrowserPathWindows,
-            mac: defaultBrowserPathMac,
-        },
+        BrowserPath: currentPlatformBrowserPath,
         CaptchaFailTimeoutInsteadOfExit: false,
         CaptchaMaxFails: 5,
         CaptchaTimeoutInMs: 30000
