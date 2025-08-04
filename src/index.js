@@ -118,8 +118,8 @@ const keypress = async () => {
       if (browserPathToUse) {
         spawnBrowser(browserPathToUse, debuggingPort);
       } else {
-        console.error(`Browser path not configured for platform: ${process.platform}. Please update config.json.`);
-        logError(`Browser path not configured for platform: ${process.platform}.`);
+        console.error(`Browser path not configured. Please update config.json.`);
+        logError(`Browser path not configured.`);
       }
     }
 
