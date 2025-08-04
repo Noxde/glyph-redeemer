@@ -1,4 +1,5 @@
-const path = require("path");
+const fs = require("fs");
+const { spawn } = require("child_process");
 
 const { createSpinner } = require("nanospinner");
 const { VTexec } = require("open-term");
@@ -8,7 +9,10 @@ const exitProgram = require("./exitProgram.js");
 const { readCodeLog, logError } = require("./logger");
 const getCodes = require("../codeUpdater");
 const redeemer = require("./redeemer.js");
-const readline = require("readline/promises");
+require("readline/promises");
+const {profilePath, getConfig, cookiesPath} = require("./config");
+
+let config = getConfig();
 
 const version = "1.5.0";
 // If its not windows and not running on a terminal then exit
@@ -17,28 +21,98 @@ if (!process.stdout.isTTY && !process.env.APPDATA) {
   process.exit(1);
 }
 
-const cookiesPath = process.pkg
-  ? path.join(path.dirname(process.execPath), "config", "cookies.json")
-  : "../config/cookies.json";
+// Function to spawn the browser
+function spawnBrowser(debuggingPort) {
+  try {
+    console.log(`Attempting to launch browser: ${config.BrowserPath}`);
+    const args = [
+      `--remote-debugging-port=${debuggingPort}`,
+      `--user-data-dir=${profilePath}`
+    ];
+
+    const browserProcess = spawn(config.BrowserPath, args, {
+      detached: true,
+      stdio: "ignore",
+    });
+
+    browserProcess.on("error", (error) => {
+      // Probably ENOENT
+      logError(`Failed to launch browser: ${error.message}`);
+      console.log(
+        `\nFailed to launch browser, check that your BrowserPath in config.json exists.`
+      );
+      process.exit(1);
+    });
+    
+    browserProcess.unref();
+    
+    console.log(`Browser launched successfully with debugging port ${debuggingPort}.`);
+  } catch (error) {
+    console.error(`Failed to launch browser: ${error.message}`);
+    logError(`Failed to launch browser: ${error.message}`);
+  }
+}
+
+// Press any key to continue from: https://stackoverflow.com/questions/19687407/press-any-key-to-continue-in-nodejs
+const keypress = async () => {
+  process.stdin.setRawMode(true)
+  return new Promise(resolve => process.stdin.once('data', data => {
+    const byteArray = [...data]
+    if (byteArray.length > 0 && byteArray[0] === 3) {
+      console.log('^C')
+      process.exit(1)
+    }
+    process.stdin.setRawMode(false)
+    resolve()
+  }))
+}
 
 (async function () {
-  try {
+  try {    
+    if (!config.AutoStart) {
+      console.log('Press any key to start.')
+      await keypress()
+    }
+    
     const isUpdated = await isLatest(version);
 
     if (!isUpdated.isLatest) {
       await update(isUpdated.assets);
     }
 
-    const debuggingPort = await getDebuggingPort();
+    const debuggingPort = config.DebuggingPort;
+    const launchBrowser = config.LaunchBrowser;
 
+    
+    // Create an empty cookies file if it doesn't exist
+    if (!fs.existsSync(cookiesPath)) {
+      try {
+        fs.writeFileSync(cookiesPath, '', 'utf8'); // Write an empty JSON object to the file
+        console.log(`Created empty cookies file because it didnt exist at: ${cookiesPath}`);
+        console.log(`Read the readme on how to import your cookies.`);
+        return exitProgram();
+      } catch (err) {
+        console.error(`Could not create the cookies file: ${err.message}`);
+        return exitProgram();
+      }
+    }
+    
     let cookies;
     try {
       cookies = require(cookiesPath);
     } catch (err) {
-      console.error(
-        "Could not find the cookies file make sure its in the config folder and the file is not empty."
-      );
+      console.error("Could not find the cookies file, make sure its in the config folder and the file is not empty.");
+      console.error("Make sure you read the readme on how to import your cookies.");
       return exitProgram();
+    }
+
+    if (launchBrowser) {
+      if (config.BrowserPath) {
+        spawnBrowser(debuggingPort);
+      } else {
+        console.error(`Browser path not configured. Please update config.json.`);
+        logError(`Browser path not configured.`);
+      }
     }
 
     const log = readCodeLog();
@@ -49,8 +123,8 @@ const cookiesPath = process.pkg
     });
 
     codes = codes
-      .map((x) => x.code)
-      .filter((x) => !log.find((y) => y?.code === x));
+        .map((x) => x.code)
+        .filter((x) => !log.find((y) => y?.code === x));
     if (codes.length == 0) {
       console.log("There are no new codes to redeem.");
       return exitProgram();
@@ -58,10 +132,10 @@ const cookiesPath = process.pkg
     console.log(`Found ${codes.length} new codes to redeem\n`);
 
     console.time("No codes left to redeem. Time taken");
-    await redeemer(codes, cookies, debuggingPort);
+    await redeemer(codes, cookies);
     console.timeEnd("No codes left to redeem. Time taken");
 
-    exitProgram();
+    await exitProgram();
   } catch (error) {
     console.log(`\nError: ${error.message}`);
     logError(error.message);
@@ -69,11 +143,3 @@ const cookiesPath = process.pkg
     process.exit(1);
   }
 })();
-
-async function getDebuggingPort() {
-  const rl = readline.createInterface(process.stdin, process.stdout);
-
-  const a = await rl.question("Enter your debugging port:");
-  rl.close();
-  return a;
-}
