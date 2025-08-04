@@ -73,22 +73,6 @@ function getConfig() {
     }
 
     // Ensure the nested BrowserPath properties exist for each platform
-    if (typeof config.BrowserPath !== 'object' || config.BrowserPath === null) {
-        config.BrowserPath = {};
-        configChanged = true;
-    }
-    if (!config.BrowserPath.linux) {
-        config.BrowserPath.linux = defaultConfig.BrowserPath.linux;
-        configChanged = true;
-    }
-    if (!config.BrowserPath.windows) {
-        config.BrowserPath.windows = defaultConfig.BrowserPath.windows;
-        configChanged = true;
-    }
-    if (!config.BrowserPath.mac) {
-        config.BrowserPath.mac = defaultConfig.BrowserPath.mac;
-        configChanged = true;
-    }
 
     if (configChanged) {
         fs.writeFileSync(configFilePath, JSON.stringify(config, null, 2));
