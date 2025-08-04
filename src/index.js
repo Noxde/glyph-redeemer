@@ -140,7 +140,7 @@ const keypress = async () => {
     console.log(`Found ${codes.length} new codes to redeem\n`);
 
     console.time("No codes left to redeem. Time taken");
-    await redeemer(codes, cookies, config);
+    await redeemer(codes, cookies);
     console.timeEnd("No codes left to redeem. Time taken");
 
     exitProgram();
