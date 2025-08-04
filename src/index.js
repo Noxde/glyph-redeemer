@@ -1,4 +1,3 @@
-const path = require("path");
 const fs = require("fs");
 const { spawn } = require("child_process");
 
@@ -10,8 +9,10 @@ const exitProgram = require("./exitProgram.js");
 const { readCodeLog, logError } = require("./logger");
 const getCodes = require("../codeUpdater");
 const redeemer = require("./redeemer.js");
-const readline = require("readline/promises");
+require("readline/promises");
 const {profilePath, getConfig, cookiesPath} = require("./config");
+
+let config = getConfig();
 
 const version = "1.5.0";
 // If its not windows and not running on a terminal then exit
@@ -22,15 +23,14 @@ if (!process.stdout.isTTY && !process.env.APPDATA) {
 
 // Function to spawn the browser
 function spawnBrowser(debuggingPort) {
-  const { BrowserPath: browserPath } = config;
   try {
-    console.log(`Attempting to launch browser: ${browserPath}`);
+    console.log(`Attempting to launch browser: ${config.BrowserPath}`);
     const args = [
       `--remote-debugging-port=${debuggingPort}`,
       `--user-data-dir=${profilePath}`
     ];
 
-    const browserProcess = spawn(browserPath, args, {
+    const browserProcess = spawn(config.BrowserPath, args, {
       detached: true,
       stdio: "ignore",
     });
@@ -68,9 +68,7 @@ const keypress = async () => {
 }
 
 (async function () {
-  try {
-    let config = getConfig();
-    
+  try {    
     if (!config.AutoStart) {
       console.log('Press any key to start.')
       await keypress()
@@ -92,6 +90,7 @@ const keypress = async () => {
         fs.writeFileSync(cookiesPath, '', 'utf8'); // Write an empty JSON object to the file
         console.log(`Created empty cookies file because it didnt exist at: ${cookiesPath}`);
         console.log(`Read the readme on how to import your cookies.`);
+        return exitProgram();
       } catch (err) {
         console.error(`Could not create the cookies file: ${err.message}`);
         return exitProgram();
@@ -136,7 +135,7 @@ const keypress = async () => {
     await redeemer(codes, cookies);
     console.timeEnd("No codes left to redeem. Time taken");
 
-    exitProgram();
+    await exitProgram();
   } catch (error) {
     console.log(`\nError: ${error.message}`);
     logError(error.message);
