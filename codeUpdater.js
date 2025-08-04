@@ -2,6 +2,7 @@ const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 const {logError} = require("./src/logger");
 const {getConfig} = require("./src/config");
+const { createSpinner } = require("nanospinner");
 
 /**
  * Thanks voltage for updating the list of codes
@@ -10,26 +11,38 @@ const {getConfig} = require("./src/config");
 module.exports = async function getCodes() {
   let config = getConfig();
   let browser;
+  const codesSpinner = createSpinner();
+
   const maxRetries = config.BrowserMaxConnectionTries;
   const retryDelayMs = config.BrowserWaitBetweenTriesMs;
 
   for (let i = 0; i < maxRetries; i++) {
     try {
-      console.log(`Attempting to connect to browser (Attempt ${i})...`);
+      codesSpinner.start({
+        text: `Attempting to connect to browser (Attempt ${i + 1})`,
+      });
       browser = await puppeteer.connect({
         browserURL: `http://127.0.0.1:${config.DebuggingPort}`,
       });
-      console.log(`Successfully connected to browser after ${i}.`);
+      codesSpinner.success({
+        text: `Successfully connected to browser after ${i + 1} attempts.`,
+      });      
+      
       break; // Exit the loop if connection is successful
     } catch (error) {
       // console.warn(`Failed to connect to browser: ${error.message}`);
       if (i < maxRetries - 1) { // If it's not the last attempt
-        console.log(`Retrying in ${retryDelayMs / 1000} seconds...`);
+        codesSpinner.update({
+          text: `Retrying in ${retryDelayMs / 1000} seconds...`,
+        });
         await new Promise(resolve => setTimeout(resolve, retryDelayMs));
       } else {
         // If it's the last attempt
-        logError(`Failed to connect to browser after ${i} attempts: ${error.message}`);
-        throw new Error(`Failed to connect to browser after ${i} attempts: ${error.message}`);
+        codesSpinner.error({
+          text: `Failed to connect to browser after ${i + 1} attempts`,
+        });
+        logError(`Failed to connect to browser after ${i + 1} attempts: ${error.message}`);
+        throw new Error(`Failed to connect to browser after ${i + 1} attempts: ${error.message}`);
       }
     }
   }
