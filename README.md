@@ -12,6 +12,7 @@ Thanks [Voltage](https://forums.warframe.com/profile/1419671-voltage/) for updat
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [1. Introduction](#1-introduction)
 - [2. Prerequisites](#2-prerequisites)
 - [3. Download](#3-download)
@@ -58,43 +59,60 @@ After installing cookie editor make sure to click on All sites when the extensio
    glyph-redeemer/config/cookies.json
    ```
 
-4. Start your browser with the remote debugging port flag
+4. Edit the config file on:
 
-   On Windows:
+   ```
+   glyph-redeemer/config/config.json
+   ```
+
+   | key                             | type    | default                    | description                                                                                                                              |
+   | ------------------------------- | ------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+   | AutoStart                       | boolean | false                      | Whether the Glyph Redeemer will automatically start or you need to press a key to start it                                               |
+   | DebuggingPort                   | number  | 9222                       | The debugging port used by your browser for Glyph Redeemer to connect to                                                                 |
+   | LaunchBrowser                   | boolean | true                       | Whether the browser will be automatically spawned (use false if you want to execute it manually)                                         |
+   | BrowserMaxConnectionTries       | number  | 5                          | How many times will Glyph Redeemer try to connect to your browser                                                                        |
+   | BrowserWaitBetweenTriesMs       | number  | 500                        | How long will Glyph Redeemer wait between each attempt                                                                                   |
+   | BrowserPath                     | string  | Default google chrome path | The path to your browser executable (the default depends on your OS and will be set when you run Glyph Redeemer)                         |
+   | CaptchaFailTimeoutInsteadOfExit | boolean | true                       | Whether Glyph Redeemer will exit after it fails the max amount of captchas or if it should wait a set amount of time before trying again |
+   | CaptchaMaxFails                 | number  | 5                          | The max amount of captchas Glyph Redeemer can fail before exiting or waiting the set amount of time                                      |
+   | CaptchaTimeoutInMs              | number  | 30000                      | Time in milliseconds that Glyph Redeemer should wait before trying again after failing the max amount of captchas                        |
+
+   The only option you should really change is "BrowserPath" or "AutoStart" if you already set up the new profile and want to run this again. To get your browser path follow this instructions:
+
+   #### On Windows:
 
    - Search for your browser on the start menu
    - Right click it and click on "Open file location", this will open a shortcuts folder
-   - Right click the browser shortcut and click on "Open file location" again
-   - Hold shift and right click on the empty space and click "Open in windows terminal" or "Open PowerShell window here"
-   - On the terminal now enter
+   - Right click the browser's shortcut and click on "Open file location" again
+   - Hold Shift and right click on your browser's executable and click "Copy as path"
 
-     ```
-       ./browser.exe --remote-debugging-port=9222 --user-data-dir="%LOCALAPPDATA%\glyph-redeemer-profile"
-     ```
-
-     (replace browser with your browser's executable name)
-
-   On Linux:
+   #### On Linux/Mac:
 
    - Open a terminal and do
 
      ```
-     browser --remote-debugging-port=9222 --user-data-dir="$HOME/glyph-redeemer-profile"
+     where browser
      ```
 
-     (browser will depend on your browser executable)
+     or
 
-5. After setting up the new profile you can start glyph redeemer and enter your debugging port (you can use anything other than 9222 if you want when starting your browser)
+     ```
+     which browser
+     ```
 
-6. Glyph redeemer now will connect to your browser and start redeeming the codes, displaying success or failure for each code.
+     (browser will depend on your browser's executable. e.g: google-chrome-stable)
 
-  > [!IMPORTANT]
-  > You need to leave the browser on the warframe tab to allow the script to work
+5. After setting up your browser path and pasting your cookies you can run Glyph Redeemer. set up the new profile and you can press any key to start.
+<!-- TODO: Add video setting it up -->
 
-   ![Glyph Redeemer in Action](Images/glyph-redeemer_demo.gif)
+> [!IMPORTANT]
+> You need to leave the browser on the warframe tab to allow the script to work
 
-  > [!NOTE]
-  > **Glyph Redeemer may exit before redeeming all the codes if it encounters multiple captchas to avoid being IP banned. if this happens, try running Glyph Redeemer later.**
+<!-- Video working -->
+
+<!-- prettier-ignore -->
+> [!NOTE] 
+> **Glyph Redeemer may exit before redeeming all the codes if it encounters multiple captchas to avoid being IP banned. if this happens, try running Glyph Redeemer later.**
 
 <details>
   <summary>
@@ -102,6 +120,11 @@ After installing cookie editor make sure to click on All sites when the extensio
   </summary>
   <table><thead>
       <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=2020Zero">
+            <img width="100px" src="https://i.imgur.com/j5PfRat.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=6ixGatsu">
             <img width="100px" src="https://i.imgur.com/7iWl2UI.png"/>
@@ -117,23 +140,28 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/AeonKnight.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2020Zero</td>
+        <td>6ixGatsu</td>
+        <td>AdmiralBahroo</td>
+        <td>AeonKnight86</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=AesopYOLIAN">
+            <img width="100px" src="https://i.imgur.com/SODLMPq.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=AGayGuyPlays">
             <img width="100px" src="https://i.glyphs.wf/glyphs/AGGP.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>6ixGatsu</td>
-        <td>AdmiralBahroo</td>
-        <td>AeonKnight86</td>
-        <td>AGayGuyPlays</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Akari">
             <img width="100px" src="https://i.imgur.com/KRnvW5s.png"/>
@@ -144,6 +172,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/aWaXEKe.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AesopYOLIAN</td>
+        <td>AGayGuyPlays</td>
+        <td>Akari</td>
+        <td>AlainLove</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=AlexanderDario">
             <img width="100px" src="https://i.imgur.com/sHsBrHo.png"/>
@@ -154,18 +194,6 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/Goku70seven.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Akari</td>
-        <td>AlainLove</td>
-        <td>AlexanderDario</td>
-        <td>Amprov</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=AngryUnicorn">
             <img width="100px" src="https://i.glyphs.wf/glyphs/AngryUnicorn.png"/>
@@ -176,6 +204,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/X79KSCT.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AlexanderDario</td>
+        <td>Amprov</td>
+        <td>AngryUnicorn</td>
+        <td>AnjetCat</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=AnnoyingKillah">
             <img width="100px" src="https://i.glyphs.wf/glyphs/AnnoyingKillah.png"/>
@@ -186,18 +226,6 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/49VuDAz.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>AngryUnicorn</td>
-        <td>AnjetCat</td>
-        <td>AnnoyingKillah</td>
-        <td>ArgonSix</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=AshiSogiTenno">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Ashisogitenno.png"/>
@@ -208,6 +236,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/mLh8Vzq.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AnnoyingKillah</td>
+        <td>ArgonSix</td>
+        <td>AshiSogiTenno</td>
+        <td>AsuraTenshi</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=AuntieTan">
             <img width="100px" src="https://i.imgur.com/v4dfMuS.png"/>
@@ -218,18 +258,6 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/6QDVL2X.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>AshiSogiTenno</td>
-        <td>AsuraTenshi</td>
-        <td>AuntieTan</td>
-        <td>Avelna</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Aznitrous">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Aznitrous.png"/>
@@ -238,6 +266,23 @@ After installing cookie editor make sure to click on All sites when the extensio
         <th>
           <a href="https://warframe.com/promocode?code=BigJimID">
             <img width="100px" src="https://i.glyphs.wf/glyphs/BigJimID.png"/>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AuntieTan</td>
+        <td>Avelna</td>
+        <td>Aznitrous</td>
+        <td>BigJimID</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=BlackNato974">
+            <img width="100px" src="https://i.imgur.com/YnyuViu.png"/>
           </a>
         </th>
         <th>
@@ -250,23 +295,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/XaoN4DT.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Aznitrous</td>
-        <td>BigJimID</td>
-        <td>BlackOni</td>
-        <td>BlazingCobalt</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=BlueberryCat">
             <img width="100px" src="https://i.imgur.com/1qwYZxl.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BlackNato974</td>
+        <td>BlackOni</td>
+        <td>BlazingCobalt</td>
+        <td>BlueberryCat</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=BluyayoGamer">
             <img width="100px" src="https://i.imgur.com/lpQ3zvh.png"/>
@@ -282,23 +327,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/Bricky.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>BlueberryCat</td>
-        <td>BluyayoGamer</td>
-        <td>BrazilCommunityDiscord</td>
-        <td>Bricky</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Brozime">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Brozime.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BluyayoGamer</td>
+        <td>BrazilCommunityDiscord</td>
+        <td>Bricky</td>
+        <td>Brozime</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Buff00n">
             <img width="100px" src="https://i.imgur.com/F52Ys7E.png"/>
@@ -314,23 +359,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/Bwana.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Brozime</td>
-        <td>Buff00n</td>
-        <td>BurnBxx</td>
-        <td>Bwana</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=CalamityDeath">
             <img width="100px" src="https://i.imgur.com/fJub3xm.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Buff00n</td>
+        <td>BurnBxx</td>
+        <td>Bwana</td>
+        <td>CalamityDeath</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=CaleyEmerald">
             <img width="100px" src="https://i.imgur.com/3PDmGSc.png"/>
@@ -346,23 +391,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/3fPE9FA.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>CalamityDeath</td>
-        <td>CaleyEmerald</td>
-        <td>CanOfCraig</td>
-        <td>Carchara</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Casardis">
             <img width="100px" src="https://i.imgur.com/hza6B9A.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CaleyEmerald</td>
+        <td>CanOfCraig</td>
+        <td>Carchara</td>
+        <td>Casardis</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=CephalonSquared">
             <img width="100px" src="https://i.imgur.com/Oswm6x8.png"/>
@@ -378,23 +423,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/TWxA5H9.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Casardis</td>
-        <td>CephalonSquared</td>
-        <td>CGsKnackie</td>
-        <td>ChacyTay</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Char">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Char.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CephalonSquared</td>
+        <td>CGsKnackie</td>
+        <td>ChacyTay</td>
+        <td>Char</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Chelestra">
             <img width="100px" src="https://i.imgur.com/lZIWekF.png"/>
@@ -410,23 +455,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/U0HGxKE.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Char</td>
-        <td>Chelestra</td>
-        <td>Cleonaturin</td>
-        <td>Codoma</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=CohhCarnage">
             <img width="100px" src="https://i.glyphs.wf/glyphs/CohhCarnage.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Chelestra</td>
+        <td>Cleonaturin</td>
+        <td>Codoma</td>
+        <td>CohhCarnage</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=ColdScar">
             <img width="100px" src="https://i.imgur.com/aUcB7k5.png"/>
@@ -442,23 +487,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/ODhjXdG.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>CohhCarnage</td>
-        <td>ColdScar</td>
-        <td>ColdTiger</td>
-        <td>ConclaveDiscord</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=ConfusedWarframe">
             <img width="100px" src="https://i.imgur.com/yutv1BM.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ColdScar</td>
+        <td>ColdTiger</td>
+        <td>ConclaveDiscord</td>
+        <td>ConfusedWarframe</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=CopyKavat">
             <img width="100px" src="https://i.imgur.com/OnMjvt4.png"/>
@@ -474,14 +519,19 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/BEGnJis.png"/>
           </a>
         </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=Crusader">
+            <img width="100px" src="https://i.imgur.com/YzFgRcz.png"/>
+          </a>
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>ConfusedWarframe</td>
         <td>CopyKavat</td>
         <td>Cpt_Kim</td>
         <td>Crowdi</td>
+        <td>Crusader</td>
       </tr>
     </tbody>
 <thead>
@@ -583,6 +633,11 @@ After installing cookie editor make sure to click on All sites when the extensio
 <thead>
       <tr>
         <th>
+          <a href="https://warframe.com/promocode?code=Deus">
+            <img width="100px" src="https://i.imgur.com/YeRAuyb.png"/>
+          </a>
+        </th>
+        <th>
           <a href="https://warframe.com/promocode?code=DillyFrame">
             <img width="100px" src="https://i.glyphs.wf/glyphs/DillyFrame.png"/>
           </a>
@@ -597,23 +652,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/O0VKXG9.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Deus</td>
+        <td>DillyFrame</td>
+        <td>DimitriV2</td>
+        <td>Disfusional</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=DjTechLive">
             <img width="100px" src="https://i.glyphs.wf/glyphs/DJTechlive.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>DillyFrame</td>
-        <td>DimitriV2</td>
-        <td>Disfusional</td>
-        <td>DjTechLive</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=DKDiamantes">
             <img width="100px" src="https://i.glyphs.wf/glyphs/DKDiamantes.png"/>
@@ -629,23 +684,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/IuJdqLG.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>DjTechLive</td>
+        <td>DKDiamantes</td>
+        <td>DNexus</td>
+        <td>EdRick</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Eduiy16">
             <img width="100px" src="https://i.imgur.com/eRK4RFy.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>DKDiamantes</td>
-        <td>DNexus</td>
-        <td>EdRick</td>
-        <td>Eduiy16</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=ElDanker">
             <img width="100px" src="https://i.imgur.com/UVZ0XoB.png"/>
@@ -661,23 +716,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/X4CzC5P.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Eduiy16</td>
+        <td>ElDanker</td>
+        <td>ElGrineerExiliado</td>
+        <td>EliceGameplay</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Elnoraeleo">
             <img width="100px" src="https://i.imgur.com/r5n5iA1.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>ElDanker</td>
-        <td>ElGrineerExiliado</td>
-        <td>EliceGameplay</td>
-        <td>Elnoraeleo</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Emovj">
             <img width="100px" src="https://i.imgur.com/iTpMg8j.png"/>
@@ -693,23 +748,28 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/8N6lVVM.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Elnoraeleo</td>
+        <td>Emovj</td>
+        <td>EmpyreanCap</td>
+        <td>Endotti_</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Eterion">
             <img width="100px" src="https://i.imgur.com/c9LAOxz.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Emovj</td>
-        <td>EmpyreanCap</td>
-        <td>Endotti_</td>
-        <td>Eterion</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=EveCaptura">
+            <img width="100px" src="https://i.imgur.com/7E20RFF.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=ExtraCredits">
             <img width="100px" src="https://i.imgur.com/Z2Yksxu.png"/>
@@ -720,6 +780,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/XvTsKfF.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Eterion</td>
+        <td>EveCaptura</td>
+        <td>ExtraCredits</td>
+        <td>FacelessBeanie</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=FashionFrameIsEndGame">
             <img width="100px" src="https://i.imgur.com/dcnCjuG.png"/>
@@ -730,18 +802,6 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/QKXsmSA.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>ExtraCredits</td>
-        <td>FacelessBeanie</td>
-        <td>FashionFrameIsEndGame</td>
-        <td>FatedsChronicles</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=FeelLikeAPlayer">
             <img width="100px" src="https://i.imgur.com/OFRT3Nk.png"/>
@@ -752,6 +812,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/70ieIRm.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>FashionFrameIsEndGame</td>
+        <td>FatedsChronicles</td>
+        <td>FeelLikeAPlayer</td>
+        <td>FerreusDemon</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Finlaena">
             <img width="100px" src="https://i.imgur.com/IuiUFiK.png"/>
@@ -762,18 +834,6 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/o0WxCD8.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>FeelLikeAPlayer</td>
-        <td>FerreusDemon</td>
-        <td>Finlaena</td>
-        <td>FloofyDwagon</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=FR4G-TP">
             <img width="100px" src="https://i.imgur.com/dMqHuKu.png"/>
@@ -784,6 +844,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/OVMC07U.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Finlaena</td>
+        <td>FloofyDwagon</td>
+        <td>FR4G-TP</td>
+        <td>FrostyNovaPrime</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Frozenballz">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Frozenbawz.png"/>
@@ -794,23 +866,28 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/Gara.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>FR4G-TP</td>
-        <td>FrostyNovaPrime</td>
-        <td>Frozenballz</td>
-        <td>Gara</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=Gastel">
+            <img width="100px" src="https://i.imgur.com/rRuQXP5.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=GermanCommunityDiscord">
             <img width="100px" src="https://i.glyphs.wf/glyphs/GermanCommunityDiscord.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Frozenballz</td>
+        <td>Gara</td>
+        <td>Gastel</td>
+        <td>GermanCommunityDiscord</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Gingy">
             <img width="100px" src="https://i.imgur.com/KI7OyQ9.png"/>
@@ -826,23 +903,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/88MPNvx.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>GermanCommunityDiscord</td>
-        <td>Gingy</td>
-        <td>GlamShatterSkull</td>
-        <td>Golden</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=GrindHardSquad">
             <img width="100px" src="https://i.imgur.com/uCMZwr9.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Gingy</td>
+        <td>GlamShatterSkull</td>
+        <td>Golden</td>
+        <td>GrindHardSquad</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=H3DSH0T">
             <img width="100px" src="https://i.glyphs.wf/glyphs/H3dsh0t.png"/>
@@ -854,6 +931,11 @@ After installing cookie editor make sure to click on All sites when the extensio
           </a>
         </th>
         <th>
+          <a href="https://warframe.com/promocode?code=HenchAndScrap">
+            <img width="100px" src="https://i.imgur.com/lTAKjmJ.png"/>
+          </a>
+        </th>
+        <th>
           <a href="https://warframe.com/promocode?code=HomiInvocado">
             <img width="100px" src="https://i.glyphs.wf/glyphs/HomiInvocado.png"/>
           </a>
@@ -862,9 +944,9 @@ After installing cookie editor make sure to click on All sites when the extensio
     </thead>
     <tbody>
       <tr>
-        <td>GrindHardSquad</td>
         <td>H3DSH0T</td>
         <td>HappinessDark</td>
+        <td>HenchAndScrap</td>
         <td>HomiInvocado</td>
       </tr>
     </tbody>
@@ -1095,6 +1177,11 @@ After installing cookie editor make sure to click on All sites when the extensio
 <thead>
       <tr>
         <th>
+          <a href="https://warframe.com/promocode?code=LaurieeeLG">
+            <img width="100px" src="https://i.imgur.com/f6ZpfNA.png"/>
+          </a>
+        </th>
+        <th>
           <a href="https://warframe.com/promocode?code=LeoDoodling">
             <img width="100px" src="https://i.imgur.com/OZIvRvq.png"/>
           </a>
@@ -1109,23 +1196,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/ASecpkS.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>LaurieeeLG</td>
+        <td>LeoDoodling</td>
+        <td>LeyzarGamingViews</td>
+        <td>LightMicke</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=LilLexi">
             <img width="100px" src="https://i.glyphs.wf/glyphs/LilLexi.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>LeoDoodling</td>
-        <td>LeyzarGamingViews</td>
-        <td>LightMicke</td>
-        <td>LilLexi</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=LucianPlaysAllDay">
             <img width="100px" src="https://i.imgur.com/9dGkGHu.png"/>
@@ -1141,23 +1228,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/LokKingMacho.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>LilLexi</td>
+        <td>LucianPlaysAllDay</td>
+        <td>LynxAria</td>
+        <td>Macho</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=MadFury">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Hypercaptai.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>LucianPlaysAllDay</td>
-        <td>LynxAria</td>
-        <td>Macho</td>
-        <td>MadFury</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Makarimorph">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Makarimorph.png"/>
@@ -1173,23 +1260,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/MCGamerCZ.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MadFury</td>
+        <td>Makarimorph</td>
+        <td>MaoMix</td>
+        <td>MCGamerCZ</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=McMonkeys">
             <img width="100px" src="https://i.glyphs.wf/glyphs/MCMonkeys.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Makarimorph</td>
-        <td>MaoMix</td>
-        <td>MCGamerCZ</td>
-        <td>McMonkeys</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=MeCore">
             <img width="100px" src="https://i.imgur.com/qIi7KGk.png"/>
@@ -1205,23 +1292,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/Xgboem5.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>McMonkeys</td>
+        <td>MeCore</td>
+        <td>MedusaCaptures</td>
+        <td>MHBlacky</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=MichelPostma">
             <img width="100px" src="https://i.glyphs.wf/glyphs/TheNextLevel.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>MeCore</td>
-        <td>MedusaCaptures</td>
-        <td>MHBlacky</td>
-        <td>MichelPostma</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=MikeTheBard">
             <img width="100px" src="https://i.glyphs.wf/glyphs/TVSBOH.png"/>
@@ -1237,23 +1324,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/whSBvC3.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MichelPostma</td>
+        <td>MikeTheBard</td>
+        <td>MissFwuffy</td>
+        <td>MisterGamer</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=MjikThize">
             <img width="100px" src="https://i.imgur.com/7YsNGoT.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>MikeTheBard</td>
-        <td>MissFwuffy</td>
-        <td>MisterGamer</td>
-        <td>MjikThize</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Mogamu">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Mogamu.png"/>
@@ -1269,28 +1356,50 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/MrSteelWar.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MjikThize</td>
+        <td>Mogamu</td>
+        <td>MrRoadBlock</td>
+        <td>MrSteelWar</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=MrWarframeGuy">
             <img width="100px" src="https://i.glyphs.wf/glyphs/MrWarframeGuy.png"/>
+          </a>
+        </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=Mylah">
+            <img width="100px" src="https://i.imgur.com/mQsBHes.png"/>
+          </a>
+        </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=Nelosart">
+            <img width="100px" src="https://i.imgur.com/wHdjibO.png"/>
+          </a>
+        </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=NeoNess007">
+            <img width="100px" src="https://i.imgur.com/5AsZHb0.png"/>
           </a>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Mogamu</td>
-        <td>MrRoadBlock</td>
-        <td>MrSteelWar</td>
         <td>MrWarframeGuy</td>
+        <td>Mylah</td>
+        <td>Nelosart</td>
+        <td>NeoNess007</td>
       </tr>
     </tbody>
 <thead>
       <tr>
-        <th>
-          <a href="https://warframe.com/promocode?code=Nelosart">
-            <img width="100px" src="https://i.imgur.com/wHdjibO.png"/>
-          </a>
-        </th>
         <th>
           <a href="https://warframe.com/promocode?code=NomNom">
             <img width="100px" src="https://i.imgur.com/yj61AsM.png"/>
@@ -1306,23 +1415,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/ol9bqPR.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Nelosart</td>
-        <td>NomNom</td>
-        <td>NoSympathyy</td>
-        <td>Np161</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=OddieOwl">
             <img width="100px" src="https://i.imgur.com/wk01G9R.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NomNom</td>
+        <td>NoSympathyy</td>
+        <td>Np161</td>
+        <td>OddieOwl</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=OOSIJ">
             <img width="100px" src="https://i.imgur.com/X86jVS0.png"/>
@@ -1338,23 +1447,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/OrpheusDeluxe.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>OddieOwl</td>
-        <td>OOSIJ</td>
-        <td>OriginalWickedFun</td>
-        <td>OrpheusDeluxe</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Ottofyre">
             <img width="100px" src="https://i.imgur.com/POg4Gpv.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>OOSIJ</td>
+        <td>OriginalWickedFun</td>
+        <td>OrpheusDeluxe</td>
+        <td>Ottofyre</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Ozku">
             <img width="100px" src="https://i.imgur.com/4zUQKOJ.png"/>
@@ -1370,23 +1479,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/GMXG5Gn.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Ottofyre</td>
-        <td>Ozku</td>
-        <td>PammyJammy</td>
-        <td>Pandaahh</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=PapaTLion">
             <img width="100px" src="https://i.imgur.com/OIdyoEC.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ozku</td>
+        <td>PammyJammy</td>
+        <td>Pandaahh</td>
+        <td>PapaTLion</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Parvos">
             <img width="100px" src="https://i.imgur.com/OuVQw2T.png"/>
@@ -1402,31 +1511,31 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/CcpIdnm.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>PapaTLion</td>
-        <td>Parvos</td>
-        <td>PhongFu</td>
-        <td>PlagueDirector</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=PokketNinja">
             <img width="100px" src="https://i.glyphs.wf/glyphs/PokketNinja.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Parvos</td>
+        <td>PhongFu</td>
+        <td>PlagueDirector</td>
+        <td>PokketNinja</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=PostiTV">
             <img width="100px" src="https://i.glyphs.wf/glyphs/PostiTV.png"/>
           </a>
         </th>
         <th>
-          <a href="https://warframe.com/promocode?code=Pride2024">
-            <img width="100px" src="https://i.imgur.com/MuVCZxc.png"/>
+          <a href="https://warframe.com/promocode?code=Pride2025">
+            <img width="100px" src="https://i.imgur.com/GJAT77C.png"/>
           </a>
         </th>
         <th>
@@ -1434,23 +1543,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/aM7O9Om.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>PokketNinja</td>
-        <td>PostiTV</td>
-        <td>Pride2024</td>
-        <td>PrimedAverage</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=ProfessorBroman">
             <img width="100px" src="https://i.glyphs.wf/glyphs/ProfessorBroman.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PostiTV</td>
+        <td>Pride2025</td>
+        <td>PrimedAverage</td>
+        <td>ProfessorBroman</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Purkinje">
             <img width="100px" src="https://i.imgur.com/8AsfxMM.png"/>
@@ -1466,23 +1575,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/o8LfmQq.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>ProfessorBroman</td>
-        <td>Purkinje</td>
-        <td>PurpleFlurp</td>
-        <td>Pyrah</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=PyrrhicSerenity">
             <img width="100px" src="https://i.imgur.com/jXy0dwh.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Purkinje</td>
+        <td>PurpleFlurp</td>
+        <td>Pyrah</td>
+        <td>PyrrhicSerenity</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=QuadlyStop">
             <img width="100px" src="https://i.imgur.com/QEjUevV.png"/>
@@ -1498,23 +1607,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/kZmulG3.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>PyrrhicSerenity</td>
-        <td>QuadlyStop</td>
-        <td>r/Warframe</td>
-        <td>RagingTerror</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Rahetalius">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Rahetalius.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>QuadlyStop</td>
+        <td>r/Warframe</td>
+        <td>RagingTerror</td>
+        <td>Rahetalius</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Rahny">
             <img width="100px" src="https://i.imgur.com/0eO14So.png"/>
@@ -1530,14 +1639,19 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/lvDbR7M.png"/>
           </a>
         </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=Reliquary">
+            <img width="100px" src="https://i.imgur.com/hDo1ZOQ.png"/>
+          </a>
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Rahetalius</td>
         <td>Rahny</td>
         <td>RainbowWaffles</td>
         <td>RelentlessZen</td>
+        <td>Reliquary</td>
       </tr>
     </tbody>
 <thead>
@@ -1553,13 +1667,13 @@ After installing cookie editor make sure to click on All sites when the extensio
           </a>
         </th>
         <th>
-          <a href="https://warframe.com/promocode?code=Rikenz">
-            <img width="100px" src="https://i.imgur.com/DvWrGgu.png"/>
+          <a href="https://warframe.com/promocode?code=RickunPrime">
+            <img width="100px" src="https://i.imgur.com/gE2xwHJ.png"/>
           </a>
         </th>
         <th>
-          <a href="https://warframe.com/promocode?code=Rippz0r">
-            <img width="100px" src="https://i.glyphs.wf/glyphs/Rippz0r.png"/>
+          <a href="https://warframe.com/promocode?code=Rikenz">
+            <img width="100px" src="https://i.imgur.com/DvWrGgu.png"/>
           </a>
         </th>
       </tr>
@@ -1568,12 +1682,17 @@ After installing cookie editor make sure to click on All sites when the extensio
       <tr>
         <td>RetroAlchemist</td>
         <td>ReyGanso</td>
+        <td>RickunPrime</td>
         <td>Rikenz</td>
-        <td>Rippz0r</td>
       </tr>
     </tbody>
 <thead>
       <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=Rippz0r">
+            <img width="100px" src="https://i.glyphs.wf/glyphs/Rippz0r.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=Ritens">
             <img width="100px" src="https://i.imgur.com/phdd1fR.png"/>
@@ -1589,23 +1708,28 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/n4mLacz.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rippz0r</td>
+        <td>Ritens</td>
+        <td>RoyalPrat</td>
+        <td>RustyFin</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=RWeress">
+            <img width="100px" src="https://i.imgur.com/4IRnLph.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=Sapmatic">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Sapmatic.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Ritens</td>
-        <td>RoyalPrat</td>
-        <td>RustyFin</td>
-        <td>Sapmatic</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=SarahTsang">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Sarahtsang.png"/>
@@ -1616,6 +1740,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/3KDp67l.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>RWeress</td>
+        <td>Sapmatic</td>
+        <td>SarahTsang</td>
+        <td>Scallion</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=ScarletMoon">
             <img width="100px" src="https://i.imgur.com/Q9wedXj.png"/>
@@ -1626,23 +1762,28 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/yxN2twN.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>SarahTsang</td>
-        <td>Scallion</td>
-        <td>ScarletMoon</td>
-        <td>Searyn</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=SecriotMcFly">
+            <img width="100px" src="https://i.imgur.com/btATLR5.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=SerdarSari">
             <img width="100px" src="https://i.glyphs.wf/glyphs/BBSChainWarden.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ScarletMoon</td>
+        <td>Searyn</td>
+        <td>SecriotMcFly</td>
+        <td>SerdarSari</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Sharlazard">
             <img width="100px" src="https://i.imgur.com/jlnKHja.png"/>
@@ -1658,14 +1799,19 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/SherpaRage.png"/>
           </a>
         </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=ShinobiFufu">
+            <img width="100px" src="https://i.imgur.com/SKgr636.png"/>
+          </a>
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>SerdarSari</td>
         <td>Sharlazard</td>
         <td>ShenZhao</td>
         <td>Sherpa</td>
+        <td>ShinobiFufu</td>
       </tr>
     </tbody>
 <thead>
@@ -1750,8 +1896,8 @@ After installing cookie editor make sure to click on All sites when the extensio
           </a>
         </th>
         <th>
-          <a href="https://warframe.com/promocode?code=Str8opticroyal">
-            <img width="100px" src="https://i.imgur.com/g6AmQYn.png"/>
+          <a href="https://warframe.com/promocode?code=StallordD">
+            <img width="100px" src="https://i.imgur.com/1gcKxxB.png"/>
           </a>
         </th>
       </tr>
@@ -1761,11 +1907,16 @@ After installing cookie editor make sure to click on All sites when the extensio
         <td>SpaceWaifu</td>
         <td>Spandy</td>
         <td>SpecialEffect</td>
-        <td>Str8opticroyal</td>
+        <td>StallordD</td>
       </tr>
     </tbody>
 <thead>
       <tr>
+        <th>
+          <a href="https://warframe.com/promocode?code=Str8opticroyal">
+            <img width="100px" src="https://i.imgur.com/g6AmQYn.png"/>
+          </a>
+        </th>
         <th>
           <a href="https://warframe.com/promocode?code=Strippin">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Strippin.png"/>
@@ -1781,23 +1932,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/TPoRS3x.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Str8opticroyal</td>
+        <td>Strippin</td>
+        <td>StudioCyen</td>
+        <td>TacticalPotato</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Tanchan">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Tanchan.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Strippin</td>
-        <td>StudioCyen</td>
-        <td>TacticalPotato</td>
-        <td>Tanchan</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=TBGKaru">
             <img width="100px" src="https://i.imgur.com/6VDNJ2T.png"/>
@@ -1809,11 +1960,6 @@ After installing cookie editor make sure to click on All sites when the extensio
           </a>
         </th>
         <th>
-          <a href="https://warframe.com/promocode?code=Techrot-Mactics">
-            <img width="100px" src="undefined"/>
-          </a>
-        </th>
-        <th>
           <a href="https://warframe.com/promocode?code=TheGamio">
             <img width="100px" src="https://i.imgur.com/dkkfQ67.png"/>
           </a>
@@ -1822,9 +1968,9 @@ After installing cookie editor make sure to click on All sites when the extensio
     </thead>
     <tbody>
       <tr>
+        <td>Tanchan</td>
         <td>TBGKaru</td>
         <td>TeaWrex</td>
-        <td>Techrot-Mactics</td>
         <td>TheGamio</td>
       </tr>
     </tbody>
@@ -1959,8 +2105,18 @@ After installing cookie editor make sure to click on All sites when the extensio
 <thead>
       <tr>
         <th>
+          <a href="https://warframe.com/promocode?code=Vector">
+            <img width="100px" src="https://i.imgur.com/uyBxp21.png"/>
+          </a>
+        </th>
+        <th>
           <a href="https://warframe.com/promocode?code=Vernoc">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Vernoc.png"/>
+          </a>
+        </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=Veroz">
+            <img width="100px" src="https://i.imgur.com/ldEz9Oh.png"/>
           </a>
         </th>
         <th>
@@ -1968,6 +2124,18 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/VMIhFKi.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vector</td>
+        <td>Vernoc</td>
+        <td>Veroz</td>
+        <td>VoidFissureBR</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Voli">
             <img width="100px" src="https://i.imgur.com/ylJQLqs.png"/>
@@ -1978,23 +2146,28 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.glyphs.wf/glyphs/VoltTheHero.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Vernoc</td>
-        <td>VoidFissureBR</td>
-        <td>Voli</td>
-        <td>VoltTheHero</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=VVhiteAngel">
             <img width="100px" src="https://i.glyphs.wf/glyphs/VVhiteAngel.png"/>
           </a>
         </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=WalterDV">
+            <img width="100px" src="https://i.imgur.com/HarjY4K.png"/>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Voli</td>
+        <td>VoltTheHero</td>
+        <td>VVhiteAngel</td>
+        <td>WalterDV</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Wanderbots">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Wanderbots.png"/>
@@ -2010,23 +2183,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/xuabUIg.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>VVhiteAngel</td>
-        <td>Wanderbots</td>
-        <td>WarframeCommunityDiscord</td>
-        <td>WarframeFlo</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=WarframeRunway">
             <img width="100px" src="https://i.imgur.com/JcJ1TVw.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Wanderbots</td>
+        <td>WarframeCommunityDiscord</td>
+        <td>WarframeFlo</td>
+        <td>WarframeRunway</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=WarframeWiki">
             <img width="100px" src="https://i.imgur.com/Usa2JKn.png"/>
@@ -2042,23 +2215,23 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/nYcXUBq.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>WarframeRunway</td>
-        <td>WarframeWiki</td>
-        <td>WealWest</td>
-        <td>WideScreenJohn</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Woxli">
             <img width="100px" src="https://i.glyphs.wf/glyphs/Woxli.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>WarframeWiki</td>
+        <td>WealWest</td>
+        <td>WideScreenJohn</td>
+        <td>Woxli</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=xBocchanVTx">
             <img width="100px" src="https://i.imgur.com/3q9NxEL.png"/>
@@ -2074,26 +2247,31 @@ After installing cookie editor make sure to click on All sites when the extensio
             <img width="100px" src="https://i.imgur.com/Qy5sBDO.png"/>
           </a>
         </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Woxli</td>
-        <td>xBocchanVTx</td>
-        <td>Xenogelion</td>
-        <td>xxVampixx</td>
-      </tr>
-    </tbody>
-<thead>
-      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=YourLuckyClover">
             <img width="100px" src="https://i.imgur.com/2R0ddP7.png"/>
           </a>
         </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>xBocchanVTx</td>
+        <td>Xenogelion</td>
+        <td>xxVampixx</td>
+        <td>YourLuckyClover</td>
+      </tr>
+    </tbody>
+<thead>
+      <tr>
         <th>
           <a href="https://warframe.com/promocode?code=Zarionis">
             <img width="100px" src="https://i.imgur.com/mb6IYIF.png"/>
+          </a>
+        </th>
+        <th>
+          <a href="https://warframe.com/promocode?code=Zexiontat">
+            <img width="100px" src="https://i.imgur.com/KQtPWjL.png"/>
           </a>
         </th>
         <th>
@@ -2104,8 +2282,8 @@ After installing cookie editor make sure to click on All sites when the extensio
     </thead>
     <tbody>
       <tr>
-        <td>YourLuckyClover</td>
         <td>Zarionis</td>
+        <td>Zexiontat</td>
         <td>Zxpfer</td></tr>
     </tbody>
 </table>

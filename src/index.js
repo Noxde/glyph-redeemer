@@ -10,7 +10,7 @@ const { readCodeLog, logError } = require("./logger");
 const getCodes = require("../codeUpdater");
 const redeemer = require("./redeemer.js");
 require("readline/promises");
-const {profilePath, getConfig, cookiesPath} = require("./config");
+const { profilePath, getConfig, cookiesPath } = require("./config");
 
 let config = getConfig();
 
@@ -24,10 +24,17 @@ if (!process.stdout.isTTY && !process.env.APPDATA) {
 // Function to spawn the browser
 function spawnBrowser(debuggingPort) {
   try {
+    if (!fs.existsSync(config.BrowserPath)) {
+      console.error(
+        `BrowserPath does not exist: ${config.BrowserPath}. Check your config.json file`
+      );
+      process.exit(1);
+    }
+
     console.log(`Attempting to launch browser: ${config.BrowserPath}`);
     const args = [
       `--remote-debugging-port=${debuggingPort}`,
-      `--user-data-dir=${profilePath}`
+      `--user-data-dir=${profilePath}`,
     ];
 
     const browserProcess = spawn(config.BrowserPath, args, {
@@ -36,59 +43,56 @@ function spawnBrowser(debuggingPort) {
     });
 
     browserProcess.on("error", (error) => {
-      // Probably ENOENT
-      logError(`Failed to launch browser: ${error.message}`);
-      console.log(
-        `\nFailed to launch browser, check that your BrowserPath in config.json exists.`
-      );
+      logError(`Something went wrong with the browser: ${error.message}`);
+      console.log(`\nSomething went wrong with the browser.`);
       process.exit(1);
     });
-    
+
     browserProcess.unref();
-    
-    console.log(`Browser launched successfully with debugging port ${debuggingPort}.`);
+
+    console.log(
+      `Browser launched successfully with debugging port ${debuggingPort}.`
+    );
   } catch (error) {
-    console.error(`Failed to launch browser: ${error.message}`);
     logError(`Failed to launch browser: ${error.message}`);
+    throw new Error(`Failed to launch browser: ${error.message}`);
   }
 }
 
 // Press any key to continue from: https://stackoverflow.com/questions/19687407/press-any-key-to-continue-in-nodejs
 const keypress = async () => {
-  process.stdin.setRawMode(true)
-  return new Promise(resolve => process.stdin.once('data', data => {
-    const byteArray = [...data]
-    if (byteArray.length > 0 && byteArray[0] === 3) {
-      console.log('^C')
-      process.exit(1)
-    }
-    process.stdin.setRawMode(false)
-    resolve()
-  }))
-}
+  process.stdin.setRawMode(true);
+  return new Promise((resolve) =>
+    process.stdin.once("data", (data) => {
+      const byteArray = [...data];
+      if (byteArray.length > 0 && byteArray[0] === 3) {
+        console.log("^C");
+        process.exit(1);
+      }
+      process.stdin.setRawMode(false);
+      resolve();
+    })
+  );
+};
 
 (async function () {
-  try {    
-    if (!config.AutoStart) {
-      console.log('Press any key to start.')
-      await keypress()
-    }
-    
+  const debuggingPort = config.DebuggingPort;
+  const launchBrowser = config.LaunchBrowser;
+
+  try {
     const isUpdated = await isLatest(version);
 
     if (!isUpdated.isLatest) {
       await update(isUpdated.assets);
     }
 
-    const debuggingPort = config.DebuggingPort;
-    const launchBrowser = config.LaunchBrowser;
-
-    
     // Create an empty cookies file if it doesn't exist
     if (!fs.existsSync(cookiesPath)) {
       try {
-        fs.writeFileSync(cookiesPath, '', 'utf8'); // Write an empty JSON object to the file
-        console.log(`Created empty cookies file because it didnt exist at: ${cookiesPath}`);
+        fs.writeFileSync(cookiesPath, "", "utf8"); // Write an empty JSON object to the file
+        console.log(
+          `Created empty cookies file because it didnt exist at: ${cookiesPath}`
+        );
         console.log(`Read the readme on how to import your cookies.`);
         return exitProgram();
       } catch (err) {
@@ -96,13 +100,17 @@ const keypress = async () => {
         return exitProgram();
       }
     }
-    
+
     let cookies;
     try {
       cookies = require(cookiesPath);
     } catch (err) {
-      console.error("Could not find the cookies file, make sure its in the config folder and the file is not empty.");
-      console.error("Make sure you read the readme on how to import your cookies.");
+      console.error(
+        "Could not find the cookies file, make sure its in the config folder and the file is not empty."
+      );
+      console.error(
+        "Make sure you read the readme on how to import your cookies."
+      );
       return exitProgram();
     }
 
@@ -110,9 +118,21 @@ const keypress = async () => {
       if (config.BrowserPath) {
         spawnBrowser(debuggingPort);
       } else {
-        console.error(`Browser path not configured. Please update config.json.`);
+        console.error(
+          `Browser path not configured. Please update config.json.`
+        );
         logError(`Browser path not configured.`);
       }
+    }
+
+    if (!config.AutoStart) {
+      console.log(
+        "\nSet up the new profile if you haven't, then press any key to start."
+      );
+      console.log(
+        "If you already set up the profile and would like to skip this the next time you run the program, change AutoStart to true on the config.json file."
+      );
+      await keypress();
     }
 
     const log = readCodeLog();
@@ -123,8 +143,8 @@ const keypress = async () => {
     });
 
     codes = codes
-        .map((x) => x.code)
-        .filter((x) => !log.find((y) => y?.code === x));
+      .map((x) => x.code)
+      .filter((x) => !log.find((y) => y?.code === x));
     if (codes.length == 0) {
       console.log("There are no new codes to redeem.");
       return exitProgram();
