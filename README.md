@@ -51,7 +51,7 @@ After installing cookie editor make sure to click on All sites when the extensio
 
 2. Use the cookie editor extension to export your cookies as JSON.
 
-   ![Cookie Editor](Images/cookie-editor.png)
+   ![Cookie Editor](Images/cookie-editor.png?)
 
 3. Paste the exported cookies into the following directory:
 
@@ -103,12 +103,14 @@ After installing cookie editor make sure to click on All sites when the extensio
      (browser will depend on your browser's executable. e.g: google-chrome-stable)
 
 5. After setting up your browser path and pasting your cookies you can run Glyph Redeemer. set up the new profile and you can press any key to start.
-<!-- TODO: Add video setting it up -->
+
+https://github.com/user-attachments/assets/7e815a60-5e9a-4992-bef7-52a5640067a0
 
 > [!IMPORTANT]
 > You need to leave the browser on the warframe tab to allow the script to work
 
-<!-- Video working -->
+https://github.com/user-attachments/assets/de0ee181-1278-47ba-a958-0ef950032582
+
 
 <!-- prettier-ignore -->
 > [!NOTE] 
