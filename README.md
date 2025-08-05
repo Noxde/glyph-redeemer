@@ -73,7 +73,7 @@ After installing cookie editor make sure to click on All sites when the extensio
    | BrowserMaxConnectionTries       | number  | 5                          | How many times will Glyph Redeemer try to connect to your browser                                                                        |
    | BrowserWaitBetweenTriesMs       | number  | 500                        | How long will Glyph Redeemer wait between each attempt                                                                                   |
    | BrowserPath                     | string  | Default google chrome path | The path to your browser executable (the default depends on your OS and will be set when you run Glyph Redeemer)                         |
-   | CaptchaFailTimeoutInsteadOfExit | boolean | true                       | Whether Glyph Redeemer will exit after it fails the max amount of captchas or if it should wait a set amount of time before trying again |
+   | CaptchaFailTimeoutInsteadOfExit | boolean | false                       | Whether Glyph Redeemer will exit after it fails the max amount of captchas or if it should wait a set amount of time before trying again |
    | CaptchaMaxFails                 | number  | 5                          | The max amount of captchas Glyph Redeemer can fail before exiting or waiting the set amount of time                                      |
    | CaptchaTimeoutInMs              | number  | 30000                      | Time in milliseconds that Glyph Redeemer should wait before trying again after failing the max amount of captchas                        |
 
