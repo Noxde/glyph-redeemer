@@ -4,17 +4,18 @@ const {
   transports,
 } = require("winston");
 const { readFileSync, existsSync } = require("fs");
+const {errorsPath, logsPath} = require("./config");
 
 const errorLogger = createLogger({
   level: "error",
   format: combine(timestamp(), json()),
-  transports: [new transports.File({ filename: "./glyph-redeemer/errors.log" })],
+  transports: [new transports.File({ filename: errorsPath })],
 });
 
 const codeLogger = createLogger({
   level: "info",
   format: combine(timestamp(), json()),
-  transports: [new transports.File({ filename: "./glyph-redeemer/redeemed.log" })],
+  transports: [new transports.File({ filename: logsPath })],
 });
 
 function logCode(code, log) {
@@ -31,11 +32,11 @@ function logError(err) {
 }
 
 function readCodeLog() {
-  if (!existsSync("./glyph-redeemer/redeemed.log")) {
+  if (!existsSync(logsPath)) {
     return [];
   }
 
-  const json = readFileSync("./glyph-redeemer/redeemed.log", { encoding: "utf-8" })
+  const json = readFileSync(errorsPath, { encoding: "utf-8" })
     .split("\n")
     .filter(Boolean)
     .map((x) => JSON.parse(x));

@@ -2,6 +2,10 @@
 
 const { writeFileSync } = require("fs");
 const getCodes = require("./codeUpdater");
+const {getConfig} = require("./config");
+const path = require("path");
+
+let config = getConfig();
 
 (async function () {
   const codes = await getCodes(9222);
@@ -9,7 +13,7 @@ const getCodes = require("./codeUpdater");
   let list = "";
   codes.sort((a, b) => (a.code.toLowerCase() < b.code.toLowerCase() ? -1 : 1));
   writeFileSync(
-    "./glyph-redeemer/codes.txt",
+      path.join(config.configPath, "codes.txt"),
     codes.map((x) => x.code).join("\n"),
     "utf-8"
   );

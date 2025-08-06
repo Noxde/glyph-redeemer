@@ -1,13 +1,25 @@
 const fs = require("fs");
 const path = require("path");
 
-const configPath = process.pkg
-    ? path.join(path.dirname(process.execPath), "config")
-    : path.join(__dirname, "..", "config");
+// Check if both files exist in the current working directory
+const cwd = process.cwd();
+const hasLocalFiles = fs.existsSync(path.join(cwd, "config.json")) &&
+    fs.existsSync(path.join(cwd, "cookies.json"));
+
+if (hasLocalFiles) {
+    configPath = cwd;
+} else {
+    configPath = process.pkg
+        ? path.join(path.dirname(process.execPath), "config")
+        : path.join(__dirname, "..", "config");
+}
 
 const cookiesPath = path.join(configPath, "cookies.json");
 const configFilePath = path.join(configPath, "config.json");
 const profilePath = path.join(configPath, "browser-profile");
+const codesPath = path.join(configPath, "codes.txt");
+const logsPath = path.join(configPath, "redeemed.log");
+const errorsPath = path.join(configPath, "errors.log");
 
 function getConfig() {
     // Ensure config directory exists
@@ -79,9 +91,12 @@ function getConfig() {
 }
 
 module.exports = {
-  configPath,
-  configFilePath,
-  cookiesPath,
-  profilePath,
-  getConfig
+    configPath,
+    configFilePath,
+    cookiesPath,
+    profilePath,
+    codesPath,
+    errorsPath,
+    logsPath,
+    getConfig
 };
