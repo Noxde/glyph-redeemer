@@ -10,7 +10,7 @@ const { readCodeLog, logError } = require("./logger");
 const getCodes = require("../codeUpdater");
 const redeemer = require("./redeemer.js");
 require("readline/promises");
-const { profilePath, getConfig, cookiesPath } = require("./glyph-redeemer");
+const { profilePath, getConfig, cookiesPath } = require("./config");
 
 let config = getConfig();
 
