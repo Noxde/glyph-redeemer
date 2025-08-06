@@ -8,13 +8,13 @@ const { readFileSync, existsSync } = require("fs");
 const errorLogger = createLogger({
   level: "error",
   format: combine(timestamp(), json()),
-  transports: [new transports.File({ filename: "./logs/errors.log" })],
+  transports: [new transports.File({ filename: "./glyph-redeemer/errors.log" })],
 });
 
 const codeLogger = createLogger({
   level: "info",
   format: combine(timestamp(), json()),
-  transports: [new transports.File({ filename: "./logs/redeemed.log" })],
+  transports: [new transports.File({ filename: "./glyph-redeemer/redeemed.log" })],
 });
 
 function logCode(code, log) {
@@ -31,11 +31,11 @@ function logError(err) {
 }
 
 function readCodeLog() {
-  if (!existsSync("./logs/redeemed.log")) {
+  if (!existsSync("./glyph-redeemer/redeemed.log")) {
     return [];
   }
 
-  const json = readFileSync("./logs/redeemed.log", { encoding: "utf-8" })
+  const json = readFileSync("./glyph-redeemer/redeemed.log", { encoding: "utf-8" })
     .split("\n")
     .filter(Boolean)
     .map((x) => JSON.parse(x));

@@ -3,7 +3,7 @@ const { createSpinner } = require("nanospinner");
 const { logCode, logError } = require("./logger");
 const exitProgram = require("./exitProgram");
 const { redeemed, invalid, invalidRedeemed, captcha } = require("./errors");
-const {getConfig} = require("./config");
+const {getConfig} = require("./glyph-redeemer");
 
 module.exports = async function redeemer(codes, cookies) {
   let config = getConfig();

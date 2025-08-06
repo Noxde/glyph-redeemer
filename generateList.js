@@ -9,7 +9,7 @@ const getCodes = require("./codeUpdater");
   let list = "";
   codes.sort((a, b) => (a.code.toLowerCase() < b.code.toLowerCase() ? -1 : 1));
   writeFileSync(
-    "./config/codes.txt",
+    "./glyph-redeemer/codes.txt",
     codes.map((x) => x.code).join("\n"),
     "utf-8"
   );
